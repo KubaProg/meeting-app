@@ -1,0 +1,70 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: workshop-management
+tags:
+  - name: "User"
+
+paths:
+
+  /user:
+    get:
+      summary: Getting all users
+      tags:
+        - "User"
+      operationId: getAllUsers
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+components:
+  schemas:
+    User:
+      description: User request model
+      type: object
+      required:
+        - id
+        - username
+        - password
+        - firstName
+        - lastName
+        - phoneNumber
+        - role_ids
+      properties:
+        id:
+          description: The id of user
+          type: integer
+          format: int64
+          example: 123
+        username:
+          description: the user username
+          type: string
+          example: user1@usermail.com
+        password:
+          description: the user password
+          type: string
+          example: hardpassword
+        firstName:
+          description: the user firstname
+          type: string
+          example: name
+        surname:
+          description: the user firstname
+          type: string
+          example: surname
+        phoneNumber:
+          description: the user phone number
+          type: string
+          example: 123456789
+        role_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 123
