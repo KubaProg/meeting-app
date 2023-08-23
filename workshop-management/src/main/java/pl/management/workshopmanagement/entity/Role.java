@@ -13,7 +13,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Role {
+public class Role
+{
 
     @Id
     @Column(name = "ID")
