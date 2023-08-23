@@ -17,6 +17,7 @@ services:
 
   app:
     build: .
+    image: workshop-management-image
     ports:
       - "8080:8080"
     depends_on:

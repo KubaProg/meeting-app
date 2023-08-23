@@ -6,41 +6,69 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="1" author="Wojtek">
-        <sqlFile path="01_init_scrum.sql"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"/>
 
-        <comment>Create table with Kanaban info</comment>
+    <!-- Create the USERS table -->
+    <changeSet id="create-users-table" author="your-name">
+        <createTable tableName="USERS">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR(255)"/>
+            <column name="PASSWORD" type="VARCHAR(255)"/>
+            <column name="FIRST_NAME" type="VARCHAR(255)"/>
+            <column name="SURNAME" type="VARCHAR(255)"/>
+            <column name="PHONE_NUMBER" type="VARCHAR(255)"/>
+        </createTable>
     </changeSet>
 
-    <changeSet id="2" author="Wojtek">
-        <sqlFile path="02_init_task.sql"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"/>
-
-        <comment>Create table with task info</comment>
+    <!-- Create the USER_ROLE table -->
+    <changeSet id="create-user-role-table" author="your-name">
+        <createTable tableName="ROLE">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ROLE_NAME" type="VARCHAR(255)"/>
+            <column name="ROLE_DESCRIPTION" type="VARCHAR(255)"/>
+        </createTable>
     </changeSet>
 
-    <changeSet id="3" author="Wojtek">
-        <sqlFile path="03_scrum_column.sql"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"/>
+    <changeSet id="5" author="Wojtek">
+        <createTable tableName="USER_ROLE">
+            <column name="USER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROLE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
 
-        <comment>Add scrum_id column to task table</comment>
+        <addForeignKeyConstraint
+                baseTableName="USER_ROLE"
+                baseColumnNames="USER_ID"
+                constraintName="FK_USER_ROLE_USER"
+                referencedTableName="USERS"
+                referencedColumnNames="ID"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"
+        />
+
+        <addForeignKeyConstraint
+                baseTableName="USER_ROLE"
+                baseColumnNames="ROLE_ID"
+                constraintName="FK_USER_ROLE_ROLE"
+                referencedTableName="ROLE"
+                referencedColumnNames="ID"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"
+        />
     </changeSet>
 
-    <changeSet id="4" author="Wojtek">
-        <sqlFile path="04_task_status.sql"
-                 relativeToChangelogFile="true"
-                 splitStatements="true"
-                 stripComments="true"/>
 
-        <comment>Add status column to task table</comment>
+    <changeSet id="insert-data" author="Kuba">
+        <sqlFile path="usersAndRolesInjection.sql" relativeToChangelogFile="true"/>
+        <comment>Insert users, roles, and associations</comment>
     </changeSet>
+
 
 </databaseChangeLog>
 
