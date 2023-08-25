@@ -40,8 +40,8 @@ public class User implements UserDetails
     private String surname;
 
     @Column(name = "PHONE_NUMBER")
-
-    @ManyToMany
+    private String phoneNumber;
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "USER_ROLE",
             joinColumns = @JoinColumn(name = "USER_ID"),
