@@ -7,7 +7,7 @@ tags:
 
 paths:
 
-  /user:
+  /api/v1/users:
     get:
       summary: Getting all users
       tags:
@@ -23,10 +23,30 @@ paths:
                 items:
                   $ref: '#/components/schemas/User'
 
+  /api/v1/auth/add:
+    post:
+      summary: Add user
+      tags:
+        - "User"
+      operationId: addUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserPost"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/UserRegistered'
+
 components:
   schemas:
     User:
-      description: User request model
+      description: User model
       type: object
       required:
         - id
@@ -68,3 +88,92 @@ components:
             type: integer
             format: int64
             example: 123
+
+    UserPost:
+      description: User post model
+      type: object
+      required:
+        - username
+        - password
+        - firstName
+        - lastName
+        - phoneNumber
+        - role_ids
+      properties:
+        id:
+          description: The id of user
+          type: integer
+          format: int64
+          example: 123
+        username:
+          description: the user username
+          type: string
+          example: user1@usermail.com
+        password:
+          description: the user password
+          type: string
+          example: hardpassword
+        firstName:
+          description: the user firstname
+          type: string
+          example: name
+        surname:
+          description: the user firstname
+          type: string
+          example: surname
+        phoneNumber:
+          description: the user phone number
+          type: string
+          example: 123456789
+        role_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 123
+
+    UserRegistered:
+      description: User with jwtToken model
+      type: object
+      required:
+        - username
+        - password
+        - firstName
+        - lastName
+        - phoneNumber
+        - role_ids
+        - jwt_token
+      properties:
+        id:
+          description: The id of user
+          type: integer
+          format: int64
+          example: 123
+        username:
+          description: the user username
+          type: string
+          example: user1@usermail.com
+        password:
+          description: the user password
+          type: string
+          example: hardpassword
+        firstName:
+          description: the user firstname
+          type: string
+          example: name
+        surname:
+          description: the user firstname
+          type: string
+          example: surname
+        phoneNumber:
+          description: the user phone number
+          type: string
+          example: 123456789
+        role_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 123
+        jwtToken:
+          type: string
