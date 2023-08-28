@@ -4,6 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/workshop-management/pom.xml" />
+        <option value="$PROJECT_DIR$/meeting-app/pom.xml" />
       </list>
     </option>
   </component>
