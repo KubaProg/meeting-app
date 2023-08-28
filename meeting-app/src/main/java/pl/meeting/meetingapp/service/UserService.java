@@ -5,9 +5,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.meeting.meetingapp.config.JwtService;
 import pl.meeting.meetingapp.dto.UserGetDto;
 import pl.meeting.meetingapp.dto.UserPostDto;
+import pl.meeting.meetingapp.dto.UserPutDto;
 import pl.meeting.meetingapp.entity.Role;
 import pl.meeting.meetingapp.entity.User;
 import pl.meeting.meetingapp.mapper.UserMapper;
@@ -39,6 +41,7 @@ public class UserService {
         return users;
     }
 
+    @Transactional
     public UserGetDto addUser(UserPostDto userPostDto)
     {
 
@@ -64,6 +67,12 @@ public class UserService {
         return userGetDto;
     }
 
+
+    @Transactional
+    public UserGetDto putUserById(Long id, UserPutDto userPutDto){
+        return null;
+    }
+
     public String authenticateUser(String username, String password) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -78,5 +87,7 @@ public class UserService {
         var jwtToken = jwtService.generateToken(user);
         return jwtToken;
     }
+
+
 
 }

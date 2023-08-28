@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import pl.meeting.meetingapp.mapper.UserMapper;
+import pl.meeting.meetingapp.models.UserPutModelApi;
 import pl.meeting.meetingapp.service.UserService;
 import pl.meeting.meetingapp.api.UserApi;
 import pl.meeting.meetingapp.models.UserModelApi;
@@ -37,6 +38,11 @@ public class UserController implements UserApi {
                         .map(userMapper::mapToUserModelApi)
                         .collect(Collectors.toList())
                 );
+    }
+
+    @Override
+    public ResponseEntity<UserModelApi> putUserById(UserPutModelApi body, Long id) {
+        return null;
     }
 
 }

@@ -43,6 +43,34 @@ paths:
               schema:
                   $ref: '#/components/schemas/UserRegistered'
 
+    put:
+      summary: Put user by id
+      tags:
+        - "User"
+      operationId: putUserById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserPut"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+
+
 components:
   schemas:
     User:
@@ -100,11 +128,6 @@ components:
         - phoneNumber
         - role_ids
       properties:
-        id:
-          description: The id of user
-          type: integer
-          format: int64
-          example: 123
         username:
           description: the user username
           type: string
@@ -136,6 +159,7 @@ components:
       description: User with jwtToken model
       type: object
       required:
+        - id
         - username
         - password
         - firstName
@@ -177,3 +201,41 @@ components:
             example: 123
         jwtToken:
           type: string
+
+    UserPut:
+      description: User put model
+      type: object
+      required:
+        - username
+        - password
+        - firstName
+        - lastName
+        - phoneNumber
+        - role_ids
+      properties:
+        username:
+          description: the user username
+          type: string
+          example: user1@usermail.com
+        password:
+          description: the user password
+          type: string
+          example: hardpassword
+        firstName:
+          description: the user firstname
+          type: string
+          example: name
+        surname:
+          description: the user firstname
+          type: string
+          example: surname
+        phoneNumber:
+          description: the user phone number
+          type: string
+          example: 123456789
+        role_ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 123
