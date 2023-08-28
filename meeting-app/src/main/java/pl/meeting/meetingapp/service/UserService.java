@@ -68,8 +68,6 @@ public class UserService {
     public UserGetDto addUser(UserPostDto userPostDto)
     {
 
-//        Role roleToAdd = roleRepository.findRoleByRoleName("ROLE_USER").get();
-
         List<Role> roles = roleRepository.findAllById(userPostDto.getRoleIds());
 
         User userToSave = User.builder()
@@ -86,6 +84,7 @@ public class UserService {
 
         UserGetDto userGetDto = userMapper.mapToUserGetDto(savedUser);
         userGetDto.setJwtToken(jwtToken);
+        userGetDto.setRoleIds(userPostDto.getRoleIds());
 
         return userGetDto;
     }

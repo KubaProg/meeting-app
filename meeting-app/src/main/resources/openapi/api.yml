@@ -118,7 +118,7 @@ components:
         - firstName
         - lastName
         - phoneNumber
-        - role_ids
+        - roles
       properties:
         id:
           description: The id of user
@@ -145,8 +145,8 @@ components:
           description: the user phone number
           type: string
           example: 123456789
-        role_ids:
-          type: array
+        roles:
+          type: Object
           items:
             type: integer
             format: int64
