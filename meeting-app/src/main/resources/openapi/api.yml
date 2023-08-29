@@ -43,6 +43,7 @@ paths:
               schema:
                   $ref: '#/components/schemas/UserRegistered'
 
+  /api/v1/user/{id}:
     put:
       summary: Put user by id
       tags:
@@ -285,3 +286,48 @@ components:
       required:
         - username
         - password
+
+    Event:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        date:
+          type: string  # You can use 'string' for dates, or 'date' if you prefer a date format
+        startTime:
+          type: string  # You can use 'string' for times, or 'time' if you prefer a time format
+        endTime:
+          type: string  # You can use 'string' for times, or 'time' if you prefer a time format
+        location_id:
+          type: integer
+      required:
+        - id
+        - name
+        - date
+        - startTime
+        - endTime
+        - location_id
+
+    Location:
+        type: object
+        properties:
+          id:
+            type: integer
+          name:
+            type: string
+          address:
+            type: string
+          latitude:
+            type: number
+          longitude:
+            type: number
+        required:
+          - id
+          - name
+          - address
+          - latitude
+          - longitude

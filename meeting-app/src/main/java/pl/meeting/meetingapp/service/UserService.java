@@ -93,24 +93,25 @@ public class UserService {
     public UserGetDto putUserById(Long id, UserPutDto userPutDto)
     {
 
-//        Role roleToAdd = roleRepository.findRoleByRoleName("ROLE_USER").get();
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User with this id not found"));
 
         List<Role> roles = roleRepository.findAllById(userPutDto.getRoleIds());
+        if(roles.isEmpty()){
+            throw new RuntimeException("No roles with such ids found");
+        }
 
-        User userToSave = User.builder()
-                .firstName(userPutDto.getFirstName())
-                .surname(userPutDto.getSurname())
-                .username(userPutDto.getUsername())
-                .password(passwordEncoder.encode(userPutDto.getPassword()))
-                .phoneNumber(userPutDto.getPhoneNumber())
-                .roles(roles)
-                .build();
+        user.setId(id);
+        user.setFirstName(userPutDto.getFirstName());
+        user.setSurname(userPutDto.getSurname());
+        user.setUsername(userPutDto.getUsername());
+        user.setPassword(passwordEncoder.encode(userPutDto.getPassword()));
+        user.setPhoneNumber(userPutDto.getPhoneNumber());
+        user.setRoles(roles);
 
-        User savedUser = userRepository.save(userToSave);
+        User savedUser = userRepository.save(user);
 
-        UserGetDto userGetDto = userMapper.mapToUserGetDto(savedUser);
-
-        return userGetDto;
+        return userMapper.mapToUserGetDto(savedUser);
     }
 
     public String authenticateUser(String username, String password) {
