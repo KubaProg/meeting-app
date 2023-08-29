@@ -304,6 +304,12 @@ components:
           type: string  # You can use 'string' for times, or 'time' if you prefer a time format
         location_id:
           type: integer
+        categories:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 123
       required:
         - id
         - name
@@ -311,6 +317,7 @@ components:
         - startTime
         - endTime
         - location_id
+        - categories
 
     Location:
         type: object
@@ -331,3 +338,24 @@ components:
           - address
           - latitude
           - longitude
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        events:
+          type: array
+          items:
+            type: integer
+            format: int64
+            example: 123
+      required:
+        - id
+        - name
+        - description
+        - events

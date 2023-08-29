@@ -19,8 +19,10 @@ import pl.meeting.meetingapp.models.UserRegisteredModelApi;
 import pl.meeting.meetingapp.repository.RoleRepository;
 import pl.meeting.meetingapp.repository.UserRepository;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,7 +70,7 @@ public class UserService {
     public UserGetDto addUser(UserPostDto userPostDto)
     {
 
-        List<Role> roles = roleRepository.findAllById(userPostDto.getRoleIds());
+        Set<Role> roles = new HashSet<>(roleRepository.findAllById(userPostDto.getRoleIds()));
 
         User userToSave = User.builder()
                 .firstName(userPostDto.getFirstName())
@@ -96,7 +98,7 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User with this id not found"));
 
-        List<Role> roles = roleRepository.findAllById(userPutDto.getRoleIds());
+        Set<Role> roles = new HashSet<>(roleRepository.findAllById(userPutDto.getRoleIds()));
         if(roles.isEmpty()){
             throw new RuntimeException("No roles with such ids found");
         }

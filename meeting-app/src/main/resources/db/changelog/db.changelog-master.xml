@@ -128,5 +128,84 @@
         <comment>Insert users, roles, and associations</comment>
     </changeSet>
 
+    <changeSet id="8" author="Kuba">
+        <createTable tableName="category">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="9" author="Kuba">
+        <createTable tableName="event_category">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="event_category"
+                                 baseColumnNames="event_id"
+                                 constraintName="fk_event_category_event_id"
+                                 referencedTableName="event"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="event_category"
+                                 baseColumnNames="category_id"
+                                 constraintName="fk_event_category_category_id"
+                                 referencedTableName="category"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+
+    </changeSet>
+
+
+    <changeSet id="10" author="Kuba">
+        <sqlFile path="categoriesToEventsInjection.sql" relativeToChangelogFile="true"/>
+        <comment>Insert users, roles, and associations</comment>
+    </changeSet>
+
+
+    <changeSet id="11" author="Kuba">
+        <createTable tableName="user_event">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="user_event"
+                                 baseColumnNames="event_id"
+                                 constraintName="fk_user_event_event_id"
+                                 referencedTableName="event"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="user_event"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_event_user_user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+
+    </changeSet>
+
+    <changeSet id="12" author="Kuba">
+        <sqlFile path="associateUsersToEvents.sql" relativeToChangelogFile="true"/>
+        <comment>Insert users, roles, and associations</comment>
+    </changeSet>
+
 </databaseChangeLog>
 

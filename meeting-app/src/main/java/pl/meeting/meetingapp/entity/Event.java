@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "event")
@@ -37,5 +39,15 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "event_category",
+            joinColumns = @JoinColumn(name = "EVENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID"))
+    private List<Category> categories = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "events")
+    List<User> users = new ArrayList<>();;
 
 }
