@@ -4,6 +4,7 @@ info:
   title: workshop-management
 tags:
   - name: "User"
+  - name: "Event"
 
 paths:
 
@@ -109,6 +110,21 @@ paths:
 
   /api/v1/events:
     get:
+      summary: Getting all events
+      tags:
+        - "Event"
+      operationId: getAllEvents
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+  /api/v1/event:
+    post:
       summary: Getting all events
       tags:
         - "Event"

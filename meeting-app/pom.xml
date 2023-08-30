@@ -8,11 +8,11 @@
         <version>2.6.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>pl.management</groupId>
-    <artifactId>workshop-management</artifactId>
+    <groupId>pl.meeting</groupId>
+    <artifactId>meeting-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>workshop-management</name>
-    <description>workshop-management</description>
+    <name>meeting-app</name>
+    <description>meeting-app</description>
     <properties>
         <java.version>11</java.version>
         <maven.compiler.source>11</maven.compiler.source>

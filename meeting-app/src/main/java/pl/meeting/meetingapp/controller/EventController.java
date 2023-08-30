@@ -29,4 +29,9 @@ public class EventController implements EventApi
                                 .collect(Collectors.toList()));
     }
 
+    @Override
+    public ResponseEntity<List<EventModelApi>> getAllEvents_0() {
+        return null;
+    }
+
 }

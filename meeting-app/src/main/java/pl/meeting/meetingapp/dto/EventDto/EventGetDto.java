@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.meeting.meetingapp.entity.Location;
 
-import java.util.List;
 
 @Getter
 @Setter
