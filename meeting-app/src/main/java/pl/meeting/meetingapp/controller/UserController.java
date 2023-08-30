@@ -36,6 +36,14 @@ public class UserController implements UserApi {
     }
 
     @Override
+    public ResponseEntity<UserModelApi> putUserById(Long id, UserPutModelApi userPutModelApi) {
+        return ResponseEntity.ok()
+                .body(userMapper.mapToUserModelApi(
+                        userService.putUserById(id, userMapper.mapToUserPutDto(userPutModelApi)))
+                );
+    }
+
+    @Override
     public ResponseEntity<List<UserModelApi>> getAllUsers() {
 
         return ResponseEntity.ok()
@@ -52,13 +60,6 @@ public class UserController implements UserApi {
         return ResponseEntity.ok().build();
     }
 
-    @Override
-    public ResponseEntity<UserModelApi> putUserById(UserPutModelApi userPutModelApi, Long id) {
-        return ResponseEntity.ok()
-                .body(userMapper.mapToUserModelApi(
-                        userService.putUserById(id, userMapper.mapToUserPutDto(userPutModelApi)))
-                );
-    }
 
 
 }
