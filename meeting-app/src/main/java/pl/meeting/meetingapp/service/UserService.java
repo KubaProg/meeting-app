@@ -1,27 +1,24 @@
 package pl.meeting.meetingapp.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.meeting.meetingapp.config.JwtService;
-import pl.meeting.meetingapp.dto.UserGetDto;
-import pl.meeting.meetingapp.dto.UserLoginDto;
-import pl.meeting.meetingapp.dto.UserPostDto;
-import pl.meeting.meetingapp.dto.UserPutDto;
+import pl.meeting.meetingapp.dto.UserDto.UserGetDto;
+import pl.meeting.meetingapp.dto.UserDto.UserLoginDto;
+import pl.meeting.meetingapp.dto.UserDto.UserPostDto;
+import pl.meeting.meetingapp.dto.UserDto.UserPutDto;
 import pl.meeting.meetingapp.entity.Role;
 import pl.meeting.meetingapp.entity.User;
 import pl.meeting.meetingapp.mapper.UserMapper;
-import pl.meeting.meetingapp.models.UserRegisteredModelApi;
 import pl.meeting.meetingapp.repository.RoleRepository;
 import pl.meeting.meetingapp.repository.UserRepository;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -56,12 +53,10 @@ public class UserService {
 
     public List<UserGetDto> getAllUsers()
     {
-        List<UserGetDto> users = userRepository.findAll()
+        return userRepository.findAll()
                 .stream()
                 .map(userMapper::mapToUserGetDto)
                 .collect(Collectors.toList());
-
-        return users;
     }
 
 
@@ -86,7 +81,6 @@ public class UserService {
 
         UserGetDto userGetDto = userMapper.mapToUserGetDto(savedUser);
         userGetDto.setJwtToken(jwtToken);
-        userGetDto.setRoleIds(userPostDto.getRoleIds());
 
         return userGetDto;
     }

@@ -1,10 +1,9 @@
-package pl.meeting.meetingapp.dto;
+package pl.meeting.meetingapp.dto.UserDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.meeting.meetingapp.entity.Role;
 
 import java.util.List;
 
@@ -12,15 +11,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserGetDto {
-
-    private Long id;
+public class UserPutDto {
     private String username;
     private String password;
     private String firstName;
     private String surname;
     private String phoneNumber;
     private List<Long> roleIds;
-    private String jwtToken;
-
 }

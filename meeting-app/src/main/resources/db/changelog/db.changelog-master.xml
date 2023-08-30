@@ -125,7 +125,7 @@
 
     <changeSet id="7" author="Kuba">
         <sqlFile path="eventAndLocationsInjection.sql" relativeToChangelogFile="true"/>
-        <comment>Insert users, roles, and associations</comment>
+        <comment>Insert events, locations, and associations</comment>
     </changeSet>
 
     <changeSet id="8" author="Kuba">
@@ -205,6 +205,11 @@
     <changeSet id="12" author="Kuba">
         <sqlFile path="associateUsersToEvents.sql" relativeToChangelogFile="true"/>
         <comment>Insert users, roles, and associations</comment>
+    </changeSet>
+
+    <changeSet id="13" author="Kuba">
+        <sqlFile path="updateUserPasswords.sql" relativeToChangelogFile="true"/>
+        <comment>Update default users passwords to bcrypt (spring security requirement)</comment>
     </changeSet>
 
 </databaseChangeLog>

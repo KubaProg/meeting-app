@@ -107,6 +107,22 @@ paths:
                 $ref: '#/components/schemas/UserRegistered'
 
 
+  /api/v1/events:
+    get:
+      summary: Getting all events
+      tags:
+        - "Event"
+      operationId: getAllEvents
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+
 components:
   schemas:
     User:
@@ -119,7 +135,6 @@ components:
         - firstName
         - lastName
         - phoneNumber
-        - roles
       properties:
         id:
           description: The id of user
@@ -146,12 +161,6 @@ components:
           description: the user phone number
           type: string
           example: 123456789
-        roles:
-          type: Object
-          items:
-            type: integer
-            format: int64
-            example: 123
 
     UserPost:
       description: User post model
@@ -302,22 +311,15 @@ components:
           type: string  # You can use 'string' for times, or 'time' if you prefer a time format
         endTime:
           type: string  # You can use 'string' for times, or 'time' if you prefer a time format
-        location_id:
-          type: integer
-        categories:
-          type: array
-          items:
-            type: integer
-            format: int64
-            example: 123
+        location:
+          $ref: '#/components/schemas/Location'
       required:
         - id
         - name
         - date
         - startTime
         - endTime
-        - location_id
-        - categories
+        - location
 
     Location:
         type: object
