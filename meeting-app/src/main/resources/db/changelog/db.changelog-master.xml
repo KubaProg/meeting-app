@@ -6,8 +6,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-
-    <!-- Create the USERS table -->
     <changeSet id="1" author="Kuba">
         <createTable tableName="USERS">
             <column name="ID" type="BIGINT" autoIncrement="true">
@@ -21,7 +19,6 @@
         </createTable>
     </changeSet>
 
-    <!-- Create the USER_ROLE table -->
     <changeSet id="2" author="Kuba">
         <createTable tableName="ROLE">
             <column name="ID" type="BIGINT" autoIncrement="true">
@@ -210,6 +207,20 @@
     <changeSet id="13" author="Kuba">
         <sqlFile path="updateUserPasswords.sql" relativeToChangelogFile="true"/>
         <comment>Update default users passwords to bcrypt (spring security requirement)</comment>
+    </changeSet>
+
+    <changeSet id="14" author="Kuba">
+        <addColumn tableName="users">
+            <column name="BIRTH_DATE" type="varchar(255)" />
+        </addColumn>
+        <addColumn tableName="users">
+            <column name="NICK" type="varchar(255)" />
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="15" author="Kuba">
+        <sqlFile path="insertBirthDateNick.sql" relativeToChangelogFile="true"/>
+        <comment>Update users with usernames user1, user2 to set missing values</comment>
     </changeSet>
 
 </databaseChangeLog>

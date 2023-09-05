@@ -151,6 +151,8 @@ components:
         - firstName
         - lastName
         - phoneNumber
+        - birthDate
+        - nick
       properties:
         id:
           description: The id of user
@@ -177,6 +179,14 @@ components:
           description: the user phone number
           type: string
           example: 123456789
+        birthDate:
+          description: the user birth date
+          type: string
+          example: 01-01-2002
+        nick:
+          description: the user nick
+          type: string
+          example: johnnnny
 
     UserPost:
       description: User post model
@@ -322,11 +332,11 @@ components:
         description:
           type: string
         date:
-          type: string  # You can use 'string' for dates, or 'date' if you prefer a date format
+          type: string
         startTime:
-          type: string  # You can use 'string' for times, or 'time' if you prefer a time format
+          type: string
         endTime:
-          type: string  # You can use 'string' for times, or 'time' if you prefer a time format
+          type: string
         location:
           $ref: '#/components/schemas/Location'
       required:

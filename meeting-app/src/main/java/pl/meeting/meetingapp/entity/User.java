@@ -41,6 +41,9 @@ public class User implements UserDetails
 
     @Column(name = "BIRTH_DATE")
     private String birthDate;
+
+    @Column(name = "NICK")
+    private String nick;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "USER_ROLE",
