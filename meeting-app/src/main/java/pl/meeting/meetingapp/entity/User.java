@@ -38,6 +38,9 @@ public class User implements UserDetails
 
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
+
+    @Column(name = "BIRTH_DATE")
+    private String birthDate;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "USER_ROLE",
