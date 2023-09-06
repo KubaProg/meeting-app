@@ -87,6 +87,27 @@ paths:
         "200":
           description: ""
 
+
+  /api/v1/user/{id}/profile:
+    get:
+      summary: get user profile information by id
+      tags:
+        - "User"
+      operationId: getUserProfile
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: "succesfull response"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+
   /api/v1/auth/login:
     post:
       summary: Log in user
@@ -387,3 +408,28 @@ components:
         - name
         - description
         - events
+
+    Profile:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        sex:
+          type: string
+        interests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        job:
+          type: string
+        school:
+          type: string
+        description:
+          type: string
+        photo:
+          type: string
+          description: url address of photo
+        city:
+          type: string

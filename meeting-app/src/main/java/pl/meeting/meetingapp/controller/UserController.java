@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-public class UserController implements UserApi {
+public class UserController implements UserApi{
 
     private final UserMapper userMapper;
     private final UserService userService;
@@ -52,6 +52,11 @@ public class UserController implements UserApi {
                         .map(userMapper::mapToUserModelApi)
                         .collect(Collectors.toList())
                 );
+    }
+
+    @Override
+    public ResponseEntity<ProfileModelApi> getUserProfile(Integer id) {
+        return null;
     }
 
     @Override
