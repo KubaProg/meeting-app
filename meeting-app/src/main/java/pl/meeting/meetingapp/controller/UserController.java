@@ -55,8 +55,10 @@ public class UserController implements UserApi{
     }
 
     @Override
-    public ResponseEntity<ProfileModelApi> getUserProfile(Integer id) {
-        return null;
+    public ResponseEntity<ProfileModelApi> getUserProfile(Long id) {
+
+        return ResponseEntity.ok()
+                .body(userService.getUserProfile(id));
     }
 
     @Override

@@ -223,5 +223,64 @@
         <comment>Update users with usernames user1, user2 to set missing values</comment>
     </changeSet>
 
+    <changeSet id="16" author="Dominik">
+        <createTable tableName="profile">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="userId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sex" type="VARCHAR(255)">
+                <constraints nullable="true"/> <!-- Jeśli to pole może być nullem -->
+            </column>
+            <column name="job" type="VARCHAR(255)">
+                <constraints nullable="true"/> <!-- Jeśli to pole może być nullem -->
+            </column>
+            <column name="school" type="VARCHAR(255)">
+                <constraints nullable="true"/> <!-- Jeśli to pole może być nullem -->
+            </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="true"/> <!-- Jeśli to pole może być nullem -->
+            </column>
+            <column name="photo" type="VARCHAR(255)">
+                <constraints nullable="true"/> <!-- Jeśli to pole może być nullem -->
+            </column>
+            <column name="city" type="VARCHAR(255)">
+                <constraints nullable="true"/> <!-- Jeśli to pole może być nullem -->
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="17" author="Dominik">
+        <!-- Tabela profile_category -->
+        <createTable tableName="profile_category">
+            <column name="profile_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Dodawanie kluczy obcych do tabeli profile_category -->
+        <addForeignKeyConstraint baseTableName="profile_category"
+                                 baseColumnNames="profile_id"
+                                 constraintName="fk_profile_category_profile_id"
+                                 referencedTableName="profile"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="profile_category"
+                                 baseColumnNames="category_id"
+                                 constraintName="fk_profile_category_category_id"
+                                 referencedTableName="category"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+    </changeSet>
+
+
 </databaseChangeLog>
 

@@ -11,14 +11,19 @@ import pl.meeting.meetingapp.dto.UserDto.UserGetDto;
 import pl.meeting.meetingapp.dto.UserDto.UserLoginDto;
 import pl.meeting.meetingapp.dto.UserDto.UserPostDto;
 import pl.meeting.meetingapp.dto.UserDto.UserPutDto;
+import pl.meeting.meetingapp.entity.Profile;
 import pl.meeting.meetingapp.entity.Role;
 import pl.meeting.meetingapp.entity.User;
+import pl.meeting.meetingapp.mapper.ProfileMapper;
 import pl.meeting.meetingapp.mapper.UserMapper;
+import pl.meeting.meetingapp.models.ProfileModelApi;
+import pl.meeting.meetingapp.repository.ProfileRepository;
 import pl.meeting.meetingapp.repository.RoleRepository;
 import pl.meeting.meetingapp.repository.UserRepository;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,6 +37,10 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
+    private final ProfileRepository profileRepository;
+
+    private final ProfileMapper profileMapper;
 
 
 
@@ -142,5 +151,11 @@ public class UserService {
                 .orElseThrow(RuntimeException::new);
     }
 
+    public ProfileModelApi getUserProfile(Long userId){
+        Profile profile = profileRepository.findProfileByUserId(userId).orElseThrow(NoSuchElementException::new);
+
+        return profileMapper.mapToProfileModelApi(profile);
+
+    }
 
 }

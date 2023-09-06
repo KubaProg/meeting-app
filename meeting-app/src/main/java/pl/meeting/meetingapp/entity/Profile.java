@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.meeting.meetingapp.models.CategoryModelApi;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -25,8 +22,12 @@ public class Profile {
 
     private Integer userId;
     private String sex;
-
-    private List<CategoryModelApi> interests;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "profile_category",
+            joinColumns = @JoinColumn(name = "PROFILE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID"))
+    private List<Category> interests;
     private String job;
     private String school;
     private String description;
