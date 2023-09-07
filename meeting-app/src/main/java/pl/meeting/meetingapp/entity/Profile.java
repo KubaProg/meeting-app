@@ -17,10 +17,11 @@ import java.util.List;
 public class Profile {
 
     @Id
-    private Integer id;
+    private Long id;
 
-
-    private Integer userId;
+    @OneToOne(fetch = FetchType.EAGER) // Ustaw fetch type zgodnie z Twoimi wymaganiami
+    @JoinColumn(name = "USER_ID")
+    private User user;
     private String sex;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

@@ -419,10 +419,10 @@ components:
           type: integer
         sex:
           type: string
-#        interests:
-#          type: array
-#          items:
-#            $ref: '#/components/schemas/Category'
+        interests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
         job:
           type: string
         school:

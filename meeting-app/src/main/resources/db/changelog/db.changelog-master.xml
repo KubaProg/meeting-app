@@ -228,7 +228,7 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="userId" type="INT">
+            <column name="user_id" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="sex" type="VARCHAR(255)">
@@ -280,6 +280,12 @@
                                  onDelete="CASCADE"
                                  onUpdate="CASCADE"/>
     </changeSet>
+
+    <changeSet id="18" author="Dominik">
+        <sqlFile path="insertProfile.sql" relativeToChangelogFile="true"/>
+        <comment>Insert Profiles</comment>
+    </changeSet>
+
 
 
 </databaseChangeLog>
