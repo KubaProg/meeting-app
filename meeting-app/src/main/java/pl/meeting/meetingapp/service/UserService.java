@@ -17,6 +17,8 @@ import pl.meeting.meetingapp.entity.User;
 import pl.meeting.meetingapp.mapper.ProfileMapper;
 import pl.meeting.meetingapp.mapper.UserMapper;
 import pl.meeting.meetingapp.models.ProfileModelApi;
+import pl.meeting.meetingapp.models.UserLoginModelApi;
+import pl.meeting.meetingapp.models.UserRegisteredModelApi;
 import pl.meeting.meetingapp.repository.ProfileRepository;
 import pl.meeting.meetingapp.repository.RoleRepository;
 import pl.meeting.meetingapp.repository.UserRepository;
@@ -45,19 +47,19 @@ public class UserService {
 
 
     @Transactional
-    public UserGetDto logInByCredentials(UserLoginDto userLoginDto) {
-        String username = userLoginDto.getUsername();
-        String password = userLoginDto.getPassword();
+    public UserRegisteredModelApi logInByCredentials(UserLoginModelApi userLoginModelApi) {
+        String username = userLoginModelApi.getUsername();
+        String password = userLoginModelApi.getPassword();
 
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         String jwtToken = authenticateUser(username,password);
 
-        UserGetDto userGetDto = userMapper.mapToUserGetDto(user);
-        userGetDto.setJwtToken(jwtToken);
+        UserRegisteredModelApi userRegisteredModelApi = userMapper.mapToUserRegisteredModelApi(user);
+        userRegisteredModelApi.setJwtToken(jwtToken);
 
-        return userGetDto;
+        return userRegisteredModelApi;
     }
 
     public List<UserGetDto> getAllUsers()

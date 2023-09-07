@@ -29,10 +29,7 @@ public class UserController implements UserApi{
     @Override
     public ResponseEntity<UserRegisteredModelApi> logInByCredentials(UserLoginModelApi userLoginModelApi) {
         return ResponseEntity.ok()
-                .body(
-                        userMapper.mapToUserRegisteredModelApi(
-                        userService.logInByCredentials(userMapper.mapToUserLoginDto(userLoginModelApi)))
-                );
+                .body(userService.logInByCredentials(userLoginModelApi));
     }
 
     @Override
