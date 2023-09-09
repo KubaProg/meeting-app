@@ -56,7 +56,7 @@ public class UserService {
 
         String jwtToken = authenticateUser(username,password);
 
-        UserRegisteredModelApi userRegisteredModelApi = userMapper.mapToUserRegisteredModelApi(user);
+        UserRegisteredModelApi userRegisteredModelApi = userMapper.mapToUserRegisteredModelApi(userMapper.mapToUserGetDto(user));
         userRegisteredModelApi.setJwtToken(jwtToken);
 
         return userRegisteredModelApi;
@@ -158,6 +158,12 @@ public class UserService {
 
         return profileMapper.mapToProfileModelApi(profile);
 
+    }
+
+    @Transactional
+    public void deleteUserProfile(Long userId) {
+
+        profileRepository.deleteProfileByUserId(userId);
     }
 
 }

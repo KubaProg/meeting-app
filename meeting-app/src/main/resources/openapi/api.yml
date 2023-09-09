@@ -108,6 +108,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Profile'
+        404:
+          description: "profile not found"
+
+    delete:
+      summary: delete profile by user id
+      tags:
+        - "User"
+      operationId: deleteProfileByUserId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: ""
+
+
+
 
   /api/v1/auth/login:
     post:

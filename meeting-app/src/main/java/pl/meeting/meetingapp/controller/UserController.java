@@ -27,6 +27,12 @@ public class UserController implements UserApi{
     }
 
     @Override
+    public ResponseEntity<Void> deleteProfileByUserId(Long id) {
+        userService.deleteUserProfile(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
     public ResponseEntity<UserRegisteredModelApi> logInByCredentials(UserLoginModelApi userLoginModelApi) {
         return ResponseEntity.ok()
                 .body(userService.logInByCredentials(userLoginModelApi));

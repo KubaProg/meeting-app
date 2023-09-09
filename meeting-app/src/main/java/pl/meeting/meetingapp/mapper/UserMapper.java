@@ -19,7 +19,16 @@ public interface UserMapper {
 
     UserPostDto mapToUserPostDto(UserPostModelApi userPostModelApi);
 
+    UserPostModelApi mapToUserPostModelApi(UserModelApi userModelApi);
+
+    UserLoginModelApi mapToUserLoginModelApi(User user);
+
+
+    UserPostModelApi mapToUserPostModelApi(User user);
+
     UserRegisteredModelApi mapToUserRegisteredModelApi(UserGetDto userGetDto);
+
+    UserRegisteredModelApi mapToUserRegisteredModelApi(User user);
 
     UserPutDto mapToUserPutDto(UserPutModelApi userPutModelApi);
 
