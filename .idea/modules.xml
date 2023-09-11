@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Meeting-app.iml" filepath="$PROJECT_DIR$/.idea/Meeting-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/meeting-app/MeetingApp.iml" filepath="$PROJECT_DIR$/meeting-app/MeetingApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meeting-app/meeting-app.iml" filepath="$PROJECT_DIR$/meeting-app/meeting-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/meeting-app/workshop-management.iml" filepath="$PROJECT_DIR$/meeting-app/workshop-management.iml" />
     </modules>
   </component>

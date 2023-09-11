@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="meeting-app" />
       </profile>
       <profile name="Annotation profile for meeting-app" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -23,6 +24,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="meeting-app" target="11" />
       <module name="MeetingApp" target="11" />
       <module name="workshop-management" target="11" />
     </bytecodeTargetLevel>
