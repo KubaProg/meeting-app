@@ -12,27 +12,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.meeting.meetingapp.config.JwtService;
-import pl.meeting.meetingapp.dto.UserDto.UserGetDto;
-import pl.meeting.meetingapp.entity.Event;
-import pl.meeting.meetingapp.entity.Role;
 import pl.meeting.meetingapp.entity.User;
-import pl.meeting.meetingapp.mapper.ProfileMapper;
-import pl.meeting.meetingapp.mapper.ProfileMapperImpl;
 import pl.meeting.meetingapp.mapper.UserMapper;
-import pl.meeting.meetingapp.mapper.UserMapperImpl;
-import pl.meeting.meetingapp.models.UserModelApi;
-import pl.meeting.meetingapp.models.UserPostModelApi;
-import pl.meeting.meetingapp.models.UserRegisteredModelApi;
 import pl.meeting.meetingapp.repository.ProfileRepository;
 import pl.meeting.meetingapp.repository.RoleRepository;
 import pl.meeting.meetingapp.repository.UserRepository;
 import pl.meeting.meetingapp.service.UserService;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)

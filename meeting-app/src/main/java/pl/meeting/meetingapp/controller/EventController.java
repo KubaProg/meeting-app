@@ -22,11 +22,7 @@ public class EventController implements EventApi
     @Override
     public ResponseEntity<List<EventModelApi>> getAllEvents() {
         return ResponseEntity.ok()
-                        .body( eventService
-                                .getEvents()
-                                .stream()
-                                .map(eventMapper::mapToEventModelApi)
-                                .collect(Collectors.toList()));
+                        .body( eventService.getEvents());
     }
 
     @Override

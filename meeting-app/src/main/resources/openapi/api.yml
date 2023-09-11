@@ -44,7 +44,7 @@ paths:
               schema:
                   $ref: '#/components/schemas/UserRegistered'
 
-  /api/v1/user/{id}:
+  /api/v1/users/{id}:
     put:
       summary: Put user by id
       tags:
@@ -88,7 +88,7 @@ paths:
           description: ""
 
 
-  /api/v1/user/{id}/profile:
+  /api/v1/users/{id}/profile:
     get:
       summary: get user profile information by id
       tags:
@@ -166,21 +166,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Event'
-  /api/v1/event:
-    post:
-      summary: Getting all events
-      tags:
-        - "Event"
-      operationId: getAllEvents
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Event'
+   
 
 components:
   schemas:
