@@ -7,7 +7,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="meeting-app" />
       </profile>
       <profile name="Annotation profile for meeting-app" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -21,6 +20,7 @@
         </processorPath>
         <module name="workshop-management" />
         <module name="MeetingApp" />
+        <module name="meeting-app" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -32,6 +32,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="MeetingApp" options="-parameters" />
+      <module name="meeting-app" options="-parameters" />
       <module name="workshop-management" options="-parameters" />
     </option>
   </component>

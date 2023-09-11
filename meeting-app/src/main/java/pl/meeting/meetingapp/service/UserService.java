@@ -16,9 +16,7 @@ import pl.meeting.meetingapp.entity.Role;
 import pl.meeting.meetingapp.entity.User;
 import pl.meeting.meetingapp.mapper.ProfileMapper;
 import pl.meeting.meetingapp.mapper.UserMapper;
-import pl.meeting.meetingapp.models.ProfileModelApi;
-import pl.meeting.meetingapp.models.UserLoginModelApi;
-import pl.meeting.meetingapp.models.UserRegisteredModelApi;
+import pl.meeting.meetingapp.models.*;
 import pl.meeting.meetingapp.repository.ProfileRepository;
 import pl.meeting.meetingapp.repository.RoleRepository;
 import pl.meeting.meetingapp.repository.UserRepository;
@@ -62,63 +60,62 @@ public class UserService {
         return userRegisteredModelApi;
     }
 
-    public List<UserGetDto> getAllUsers()
+    public List<UserModelApi> getAllUsers()
     {
         return userRepository.findAll()
-                .stream()
-                .map(userMapper::mapToUserGetDto)
+                .stream().map(userMapper::mapToUserModelApi)
                 .collect(Collectors.toList());
     }
 
 
 
     @Transactional
-    public UserGetDto addUser(UserPostDto userPostDto)
+    public UserRegisteredModelApi addUser(UserPostModelApi userPostModelApi)
     {
 
-        Set<Role> roles = new HashSet<>(roleRepository.findAllById(userPostDto.getRoleIds()));
+        Set<Role> roles = new HashSet<>(roleRepository.findAllById(userPostModelApi.getRoleIds()));
 
         User userToSave = User.builder()
-                .firstName(userPostDto.getFirstName())
-                .surname(userPostDto.getSurname())
-                .username(userPostDto.getUsername())
-                .password(passwordEncoder.encode(userPostDto.getPassword()))
-                .phoneNumber(userPostDto.getPhoneNumber())
+                .firstName(userPostModelApi.getFirstName())
+                .surname(userPostModelApi.getSurname())
+                .username(userPostModelApi.getUsername())
+                .password(passwordEncoder.encode(userPostModelApi.getPassword()))
+                .phoneNumber(userPostModelApi.getPhoneNumber())
                 .roles(roles)
                 .build();
 
         User savedUser = userRepository.save(userToSave);
-        String jwtToken = authenticateUser(userPostDto.getUsername(),userPostDto.getPassword());
+        String jwtToken = authenticateUser(userPostModelApi.getUsername(),userPostModelApi.getPassword());
 
-        UserGetDto userGetDto = userMapper.mapToUserGetDto(savedUser);
-        userGetDto.setJwtToken(jwtToken);
 
-        return userGetDto;
+        UserRegisteredModelApi userRegisteredModelApi = userMapper.mapToUserRegisteredModelApi(savedUser);
+        userRegisteredModelApi.setJwtToken(jwtToken);
+        return userRegisteredModelApi;
     }
 
     @Transactional
-    public UserGetDto putUserById(Long id, UserPutDto userPutDto)
+    public UserModelApi putUserById(Long id, UserPutModelApi userPutModelApi)
     {
 
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User with this id not found"));
 
-        Set<Role> roles = new HashSet<>(roleRepository.findAllById(userPutDto.getRoleIds()));
+        Set<Role> roles = new HashSet<>(roleRepository.findAllById(userPutModelApi.getRoleIds()));
         if(roles.isEmpty()){
             throw new RuntimeException("No roles with such ids found");
         }
 
         user.setId(id);
-        user.setFirstName(userPutDto.getFirstName());
-        user.setSurname(userPutDto.getSurname());
-        user.setUsername(userPutDto.getUsername());
-        user.setPassword(passwordEncoder.encode(userPutDto.getPassword()));
-        user.setPhoneNumber(userPutDto.getPhoneNumber());
+        user.setFirstName(userPutModelApi.getFirstName());
+        user.setSurname(userPutModelApi.getSurname());
+        user.setUsername(userPutModelApi.getUsername());
+        user.setPassword(passwordEncoder.encode(userPutModelApi.getPassword()));
+        user.setPhoneNumber(userPutModelApi.getPhoneNumber());
         user.setRoles(roles);
 
         User savedUser = userRepository.save(user);
 
-        return userMapper.mapToUserGetDto(savedUser);
+        return userMapper.mapToUserModelApi(savedUser);
     }
 
     public String authenticateUser(String username, String password) {
@@ -162,7 +159,6 @@ public class UserService {
 
     @Transactional
     public void deleteUserProfile(Long userId) {
-
         profileRepository.deleteProfileByUserId(userId);
     }
 

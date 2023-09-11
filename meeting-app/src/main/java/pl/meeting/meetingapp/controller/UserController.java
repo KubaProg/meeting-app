@@ -21,9 +21,7 @@ public class UserController implements UserApi{
 
     @Override
     public ResponseEntity<UserRegisteredModelApi> addUser(UserPostModelApi userPostModelApi) {
-        return ResponseEntity.ok(userMapper.mapToUserRegisteredModelApi(
-                userService.addUser(userMapper.mapToUserPostDto(userPostModelApi))
-        ));
+        return ResponseEntity.ok(userService.addUser(userPostModelApi));
     }
 
     @Override
@@ -41,20 +39,12 @@ public class UserController implements UserApi{
     @Override
     public ResponseEntity<UserModelApi> putUserById(Long id, UserPutModelApi userPutModelApi) {
         return ResponseEntity.ok()
-                .body(userMapper.mapToUserModelApi(
-                        userService.putUserById(id, userMapper.mapToUserPutDto(userPutModelApi)))
-                );
+                .body(userService.putUserById(id, userPutModelApi));
     }
 
     @Override
     public ResponseEntity<List<UserModelApi>> getAllUsers() {
-
-        return ResponseEntity.ok()
-                .body(userService.getAllUsers()
-                        .stream()
-                        .map(userMapper::mapToUserModelApi)
-                        .collect(Collectors.toList())
-                );
+        return ResponseEntity.ok().body(userService.getAllUsers());
     }
 
     @Override

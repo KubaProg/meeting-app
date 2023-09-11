@@ -30,7 +30,7 @@ public interface UserMapper {
 
     UserRegisteredModelApi mapToUserRegisteredModelApi(User user);
 
-    UserPutDto mapToUserPutDto(UserPutModelApi userPutModelApi);
+    UserModelApi mapToUserModelApi(User user);
 
     UserLoginDto mapToUserLoginDto(UserLoginModelApi userLoginModelApi);
 
