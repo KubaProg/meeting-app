@@ -16,7 +16,6 @@ public class EventController implements EventApi
 {
 
     private final EventService eventService;
-    private final EventMapper eventMapper;
 
     @Override
     public ResponseEntity<List<EventModelApi>> getAllEvents() {
