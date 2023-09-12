@@ -7,10 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.meeting.meetingapp.config.JwtService;
-import pl.meeting.meetingapp.dto.UserDto.UserGetDto;
-import pl.meeting.meetingapp.dto.UserDto.UserLoginDto;
-import pl.meeting.meetingapp.dto.UserDto.UserPostDto;
-import pl.meeting.meetingapp.dto.UserDto.UserPutDto;
 import pl.meeting.meetingapp.entity.Profile;
 import pl.meeting.meetingapp.entity.Role;
 import pl.meeting.meetingapp.entity.User;
@@ -54,7 +50,7 @@ public class UserService {
 
         String jwtToken = authenticateUser(username,password);
 
-        UserRegisteredModelApi userRegisteredModelApi = userMapper.mapToUserRegisteredModelApi(userMapper.mapToUserGetDto(user));
+        UserRegisteredModelApi userRegisteredModelApi = userMapper.mapToUserRegisteredModelApi(user);
         userRegisteredModelApi.setJwtToken(jwtToken);
 
         return userRegisteredModelApi;
