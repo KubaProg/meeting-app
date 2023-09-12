@@ -9,7 +9,6 @@ import pl.meeting.meetingapp.models.EventModelApi;
 import pl.meeting.meetingapp.service.EventService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,9 +24,5 @@ public class EventController implements EventApi
                         .body( eventService.getEvents());
     }
 
-    @Override
-    public ResponseEntity<List<EventModelApi>> getAllEvents_0() {
-        return null;
-    }
 
 }
