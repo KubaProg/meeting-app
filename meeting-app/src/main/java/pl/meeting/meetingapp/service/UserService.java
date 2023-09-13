@@ -33,7 +33,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-
     private final ProfileRepository profileRepository;
 
     private final ProfileMapper profileMapper;

@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import pl.meeting.meetingapp.api.EventApi;
-import pl.meeting.meetingapp.mapper.EventMapper;
 import pl.meeting.meetingapp.models.EventModelApi;
 import pl.meeting.meetingapp.service.EventService;
 
