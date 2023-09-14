@@ -1,10 +1,11 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: workshop-management
+  title: meeting-app
 tags:
   - name: "User"
   - name: "Event"
+  - name: "Profile"
 
 paths:
 
@@ -88,14 +89,14 @@ paths:
           description: ""
 
 
-  /api/v1/users/{id}/profile:
+  /api/v1/profile/{userId}:
     get:
-      summary: get user profile information by id
+      summary: get user profile information by user id
       tags:
-        - "User"
+        - "Profile"
       operationId: getUserProfile
       parameters:
-        - name: id
+        - name: userId
           in: path
           required: true
           schema:
@@ -114,7 +115,7 @@ paths:
     delete:
       summary: delete profile by user id
       tags:
-        - "User"
+        - "Profile"
       operationId: deleteProfileByUserId
       parameters:
         - name: id

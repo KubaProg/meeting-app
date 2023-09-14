@@ -105,25 +105,4 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.jwtToken", Matchers.notNullValue()));
     }
 
-    @Test
-    void deleteProfileByUserId() {
-    }
-
-    @Test
-    void putUserById() {
-    }
-
-    @Test
-    void getAllUsers() {
-
-    }
-
-    @Test
-    void getUserProfile() {
-    }
-
-    @Test
-    void deleteUserById() {
-
-    }
 }
