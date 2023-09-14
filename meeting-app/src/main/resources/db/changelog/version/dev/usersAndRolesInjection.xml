@@ -1,0 +1,47 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <!-- Insert some users -->
+    <changeSet id="insert-users" author="dominik">
+        <insert tableName="USERS">
+            <column name="USERNAME" value="user1"/>
+            <column name="PASSWORD" value="password1"/>
+            <column name="FIRST_NAME" value="John"/>
+            <column name="SURNAME" value="Doe"/>
+            <column name="PHONE_NUMBER" value="123-456-7890"/>
+        </insert>
+        <insert tableName="USERS">
+            <column name="USERNAME" value="user2"/>
+            <column name="PASSWORD" value="password2"/>
+            <column name="FIRST_NAME" value="Jane"/>
+            <column name="SURNAME" value="Smith"/>
+            <column name="PHONE_NUMBER" value="987-654-3210"/>
+        </insert>
+    </changeSet>
+
+    <!-- Insert some roles -->
+    <changeSet id="insert-roles" author="dominik">
+        <insert tableName="ROLE">
+            <column name="ROLE_NAME" value="ROLE_ADMIN"/>
+            <column name="ROLE_DESCRIPTION" value="Administrator Role"/>
+        </insert>
+        <insert tableName="ROLE">
+            <column name="ROLE_NAME" value="ROLE_USER"/>
+            <column name="ROLE_DESCRIPTION" value="User Role"/>
+        </insert>
+    </changeSet>
+
+    <!-- Associate roles with users -->
+    <changeSet id="associate-roles-with-users" author="dominik">
+        <insert tableName="USER_ROLE">
+            <column name="USER_ID" valueNumeric="1"/> <!-- User ID for 'user1' -->
+            <column name="ROLE_ID" valueNumeric="1"/> <!-- Role ID for 'ROLE_ADMIN' -->
+        </insert>
+        <insert tableName="USER_ROLE">
+            <column name="USER_ID" valueNumeric="2"/> <!-- User ID for 'user2' -->
+            <column name="ROLE_ID" valueNumeric="2"/> <!-- Role ID for 'ROLE_USER' -->
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

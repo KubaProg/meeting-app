@@ -1,0 +1,39 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <!-- Insert dummy data into the 'profile' table -->
+    <changeSet id="insert-profile-data" author="dominik">
+        <insert tableName="profile">
+            <column name="user_id" valueNumeric="1"/>
+            <column name="sex" value="Male"/>
+            <column name="job" value="Software Developer"/>
+            <column name="school" value="University A"/>
+            <column name="description" value="A software engineer with a passion for coding."/>
+            <column name="photo" value="photo1.jpg"/>
+            <column name="city" value="New York"/>
+        </insert>
+        <insert tableName="profile">
+            <column name="user_id" valueNumeric="2"/>
+            <column name="sex" value="Female"/>
+            <column name="job" value="Data Analyst"/>
+            <column name="school" value="University B"/>
+            <column name="description" value="Analyzing data is my expertise."/>
+            <column name="photo" value="photo2.jpg"/>
+            <column name="city" value="Los Angeles"/>
+        </insert>
+    </changeSet>
+
+    <!-- Insert dummy data into the 'profile_category' table -->
+    <changeSet id="insert-profile-category-data" author="dominik">
+        <insert tableName="profile_category">
+            <column name="profile_id" valueNumeric="1"/>
+            <column name="category_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="profile_category">
+            <column name="profile_id" valueNumeric="2"/>
+            <column name="category_id" valueNumeric="2"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

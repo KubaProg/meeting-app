@@ -29,6 +29,7 @@ public class SecurityConfiguration {
                 .permitAll()
                 .antMatchers("/swagger-ui/**","/v3/api-docs/swagger-config","/v3/api-docs")
                 .permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -37,6 +38,9 @@ public class SecurityConfiguration {
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
+
+        http.headers().frameOptions().sameOrigin();
 
         return http.build();
     }

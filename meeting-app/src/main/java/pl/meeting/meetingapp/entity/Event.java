@@ -5,8 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -28,13 +29,13 @@ public class Event {
     private String description;
 
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
 
     @Column(name = "start_time")
-    private String startTime;
+    private LocalTime startTime;
 
     @Column(name = "end_time")
-    private String endTime;
+    private LocalTime endTime;
 
     @ManyToOne
     @JoinColumn(name = "location_id", referencedColumnName = "id")

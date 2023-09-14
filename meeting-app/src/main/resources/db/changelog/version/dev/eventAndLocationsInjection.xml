@@ -1,0 +1,83 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <!-- Insert 5 sample locations into the location table -->
+    <changeSet id="insert-sample-locations" author="dominik">
+        <insert tableName="location">
+            <column name="name" value="Location 1"/>
+            <column name="address" value="Address 1"/>
+            <column name="latitude" valueNumeric="40.7128"/>
+            <column name="longitude" valueNumeric="-74.0060"/>
+        </insert>
+        <insert tableName="location">
+            <column name="name" value="Location 2"/>
+            <column name="address" value="Address 2"/>
+            <column name="latitude" valueNumeric="34.0522"/>
+            <column name="longitude" valueNumeric="-118.2437"/>
+        </insert>
+        <insert tableName="location">
+            <column name="name" value="Location 3"/>
+            <column name="address" value="Address 3"/>
+            <column name="latitude" valueNumeric="51.5074"/>
+            <column name="longitude" valueNumeric="-0.1278"/>
+        </insert>
+        <insert tableName="location">
+            <column name="name" value="Location 4"/>
+            <column name="address" value="Address 4"/>
+            <column name="latitude" valueNumeric="48.8566"/>
+            <column name="longitude" valueNumeric="2.3522"/>
+        </insert>
+        <insert tableName="location">
+            <column name="name" value="Location 5"/>
+            <column name="address" value="Address 5"/>
+            <column name="latitude" valueNumeric="52.5200"/>
+            <column name="longitude" valueNumeric="13.4050"/>
+        </insert>
+    </changeSet>
+
+    <!-- Insert a few sample events into the event table -->
+    <changeSet id="insert-sample-events" author="dominik">
+        <insert tableName="event">
+            <column name="name" value="Event 1"/>
+            <column name="description" value="Description 1"/>
+            <column name="date" value="2023-09-01"/>
+            <column name="start_time" value="10:00:00"/>
+            <column name="end_time" value="12:00:00"/>
+            <column name="location_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="event">
+            <column name="name" value="Event 2"/>
+            <column name="description" value="Description 2"/>
+            <column name="date" value="2023-09-02"/>
+            <column name="start_time" value="14:00:00"/>
+            <column name="end_time" value="16:00:00"/>
+            <column name="location_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="event">
+            <column name="name" value="Event 3"/>
+            <column name="description" value="Description 3"/>
+            <column name="date" value="2023-09-03"/>
+            <column name="start_time" value="11:30:00"/>
+            <column name="end_time" value="13:30:00"/>
+            <column name="location_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="event">
+            <column name="name" value="Event 4"/>
+            <column name="description" value="Description 4"/>
+            <column name="date" value="2023-09-04"/>
+            <column name="start_time" value="09:00:00"/>
+            <column name="end_time" value="11:00:00"/>
+            <column name="location_id" valueNumeric="4"/>
+        </insert>
+        <insert tableName="event">
+            <column name="name" value="Event 5"/>
+            <column name="description" value="Description 5"/>
+            <column name="date" value="2023-09-05"/>
+            <column name="start_time" value="15:00:00"/>
+            <column name="end_time" value="17:00:00"/>
+            <column name="location_id" valueNumeric="5"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

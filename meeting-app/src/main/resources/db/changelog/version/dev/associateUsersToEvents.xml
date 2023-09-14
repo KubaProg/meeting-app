@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="insert-sample-user-events" author="Dominik">
+        <insert tableName="user_event">
+            <column name="event_id" valueNumeric="1"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="user_event">
+            <column name="event_id" valueNumeric="3"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="user_event">
+            <column name="event_id" valueNumeric="4"/>
+            <column name="user_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="user_event">
+            <column name="event_id" valueNumeric="5"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="user_event">
+            <column name="event_id" valueNumeric="2"/>
+            <column name="user_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="user_event">
+            <column name="event_id" valueNumeric="3"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="user_event">
+            <column name="event_id" valueNumeric="3"/>
+            <column name="user_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="user_event">
+            <column name="event_id" valueNumeric="1"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>

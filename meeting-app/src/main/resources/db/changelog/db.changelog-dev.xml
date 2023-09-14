@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include file="version/tables/usersTable.xml" relativeToChangelogFile="true"/>
+    <include file="version/tables/roleTable.xml" relativeToChangelogFile="true"/>
+    <include file="version/tables/userRoleTable.xml" relativeToChangelogFile="true"/>
+    <include file="version/tables/locationTable.xml" relativeToChangelogFile="true"/>
+    <include file="version/tables/eventTable.xml" relativeToChangelogFile="true"/>
+    <include file="version/tables/categoryTable.xml" relativeToChangelogFile="true"/>
+    <include file="version/tables/eventCategoryTable.xml" relativeToChangelogFile="true"/>
+    <include file="version/tables/userEventTable.xml" relativeToChangelogFile="true"/>
+    <include file="version/tables/profileTable.xml" relativeToChangelogFile="true"/>
+    <include file="version/tables/profileCategoryTable.xml" relativeToChangelogFile="true"/>
+
+
+    <include file="version/dev/usersAndRolesInjection.xml" relativeToChangelogFile="true"/>
+    <include file="version/dev/eventAndLocationsInjection.xml" relativeToChangelogFile="true"/>
+    <include file="version/dev/categoriesToEventsInjection.xml" relativeToChangelogFile="true"/>
+    <include file="version/dev/associateUsersToEvents.xml" relativeToChangelogFile="true"/>
+    <include file="version/dev/updateUserPasswords.xml" relativeToChangelogFile="true"/>
+    <include file="version/dev/insertBirthDateNick.xml" relativeToChangelogFile="true"/>
+    <include file="version/dev/insertProfile.xml" relativeToChangelogFile="true"/>
+
+
+
+
+<!--        <changeSet id="4" author="Kuba">-->
+<!--            <sqlFile path="usersAndRolesInjection.sql" relativeToChangelogFile="true"/>-->
+<!--            <comment>Insert users, roles, and associations</comment>-->
+<!--        </changeSet>-->
+    
+<!--        <include file="dev/associateUsersToEvents.xml" relativeToChangelogFile="true"/>-->
+
+<!--        <changeSet id="7" author="Kuba">-->
+<!--            <sqlFile path="eventAndLocationsInjection.sql" relativeToChangelogFile="true"/>-->
+<!--            <comment>Insert events, locations, and associations</comment>-->
+<!--        </changeSet>-->
+
+<!--        <changeSet id="10" author="Kuba">-->
+<!--            <sqlFile path="categoriesToEventsInjection.sql" relativeToChangelogFile="true"/>-->
+<!--            <comment>Insert users, roles, and associations</comment>-->
+<!--        </changeSet>-->
+
+<!--        <changeSet id="12" author="Kuba">-->
+<!--            <sqlFile path="associateUsersToEvents.sql" relativeToChangelogFile="true"/>-->
+<!--            <comment>Insert users, roles, and associations</comment>-->
+<!--        </changeSet>-->
+
+<!--        <changeSet id="13" author="Kuba">-->
+<!--            <sqlFile path="updateUserPasswords.sql" relativeToChangelogFile="true"/>-->
+<!--            <comment>Update default users passwords to bcrypt (spring security requirement)</comment>-->
+<!--        </changeSet>-->
+
+<!--        <changeSet id="15" author="Kuba">-->
+<!--            <sqlFile path="insertBirthDateNick.sql" relativeToChangelogFile="true"/>-->
+<!--            <comment>Update users with usernames user1, user2 to set missing values</comment>-->
+<!--        </changeSet>-->
+<!--    -->
+<!--        <changeSet id="18" author="Dominik">-->
+<!--            <sqlFile path="insertProfile.sql" relativeToChangelogFile="true"/>-->
+<!--            <comment>Insert Profiles</comment>-->
+<!--        </changeSet>-->
+
+
+
+</databaseChangeLog>
+

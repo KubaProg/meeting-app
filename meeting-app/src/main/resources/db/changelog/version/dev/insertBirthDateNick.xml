@@ -1,0 +1,19 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <!-- Update user1 and user2 -->
+    <changeSet id="update-sample-users" author="dominik">
+        <update tableName="USERS">
+            <column name="BIRTH_DATE" value="1990-01-15"/>
+            <column name="NICK" value="Johny"/>
+            <where>USERNAME = 'user1'</where>
+        </update>
+        <update tableName="USERS">
+            <column name="BIRTH_DATE" value="1985-07-22"/>
+            <column name="NICK" value="Janey"/>
+            <where>USERNAME = 'user2'</where>
+        </update>
+    </changeSet>
+
+</databaseChangeLog>

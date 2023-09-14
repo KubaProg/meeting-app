@@ -1,0 +1,74 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+
+    <changeSet id="insert-sample-categories" author="dominik">
+        <insert tableName="category">
+            <column name="name" value="Category 1"/>
+            <column name="description" value="Description 1"/>
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="Category 2"/>
+            <column name="description" value="Description 2"/>
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="Category 3"/>
+            <column name="description" value="Description 3"/>
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="Category 4"/>
+            <column name="description" value="Description 4"/>
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="Category 5"/>
+            <column name="description" value="Description 5"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="associate-events-with-categories-dev" author="dominik">
+
+        <insert tableName="event_category">
+            <column name="event_id" valueNumeric="1"/>
+            <column name="category_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="event_category">
+            <column name="event_id" valueNumeric="1"/>
+            <column name="category_id" valueNumeric="2"/>
+        </insert>
+
+
+        <insert tableName="event_category">
+            <column name="event_id" valueNumeric="2"/>
+            <column name="category_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="event_category">
+            <column name="event_id" valueNumeric="2"/>
+            <column name="category_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="event_category">
+            <column name="event_id" valueNumeric="2"/>
+            <column name="category_id" valueNumeric="4"/>
+        </insert>
+
+
+        <insert tableName="event_category">
+            <column name="event_id" valueNumeric="3"/>
+            <column name="category_id" valueNumeric="4"/>
+        </insert>
+        <insert tableName="event_category">
+            <column name="event_id" valueNumeric="3"/>
+            <column name="category_id" valueNumeric="5"/>
+        </insert>
+
+
+        <insert tableName="event_category">
+            <column name="event_id" valueNumeric="4"/>
+            <column name="category_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+
+
+
+</databaseChangeLog>
