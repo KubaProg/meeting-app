@@ -21,7 +21,6 @@ public class ProfileController implements ProfileApi {
 
         @Override
     public ResponseEntity<ProfileModelApi> getUserProfile(Long id) {
-
         return ResponseEntity.ok()
                 .body(userService.getUserProfile(id));
     }

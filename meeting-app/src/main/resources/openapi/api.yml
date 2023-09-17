@@ -423,8 +423,6 @@ components:
       properties:
         id:
           type: integer
-        user_id:
-          type: integer
         sex:
           type: string
         interests:

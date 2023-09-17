@@ -1,9 +1,7 @@
 package pl.meeting.meetingapp.entity;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import pl.meeting.meetingapp.models.CategoryModelApi;
 
 import javax.persistence.*;
@@ -14,12 +12,15 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Profile {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER) // Ustaw fetch type zgodnie z Twoimi wymaganiami
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;
     private String sex;

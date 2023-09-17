@@ -148,7 +148,6 @@ public class UserService {
         Profile profile = profileRepository.findProfileByUserId(userId).orElseThrow(NoSuchElementException::new);
 
         return profileMapper.mapToProfileModelApi(profile);
-
     }
 
     @Transactional

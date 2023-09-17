@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import pl.meeting.meetingapp.ApiRoutes;
 import pl.meeting.meetingapp.MeetingAppApplication;
 import pl.meeting.meetingapp.models.UserLoginModelApi;
 import pl.meeting.meetingapp.models.UserPostModelApi;
@@ -31,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MeetingAppApplication.class)
 @AutoConfigureMockMvc
-class UserControllerTest {
+public class UserControllerTest {
 
     @Autowired
     UserRepository userRepository;
@@ -50,7 +51,6 @@ class UserControllerTest {
 
     @AfterAll
     static void afterAll(){
-
     }
 
     @BeforeEach
@@ -75,7 +75,7 @@ class UserControllerTest {
     @Transactional
     void addUser_DataToAddUserGiven_ShouldAddNewUser() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/api/v1/auth/add")
+                        .post(ApiRoutes.Base.PATH+ApiRoutes.User.AUTH+ApiRoutes.User.ADD)
                         .content(objectMapper.writeValueAsString(userPostModelApi))
                 .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)))
                 .andExpect(status().isOk())
@@ -88,14 +88,14 @@ class UserControllerTest {
     @Transactional
     void logInByCredentials_DataToAddUserGiven_ShouldAddNewUser() throws Exception{
 
-        UserRegisteredModelApi userRegisteredModelApi = userService.addUser(userPostModelApi);
+        userService.addUser(userPostModelApi);
 
         userLoginModelApi = new UserLoginModelApi()
                 .username(userPostModelApi.getUsername())
                 .password(userPostModelApi.getPassword());
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/api/v1/auth/login")
+                        .post(ApiRoutes.Base.PATH+ApiRoutes.User.AUTH+ApiRoutes.User.LOGIN)
                         .content(objectMapper.writeValueAsString(userLoginModelApi))
                         .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)))
                 .andExpect(status().isOk())
