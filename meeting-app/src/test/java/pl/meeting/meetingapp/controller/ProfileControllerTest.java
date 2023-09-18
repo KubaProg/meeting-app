@@ -5,11 +5,13 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import pl.meeting.meetingapp.ApiRoutes;
@@ -28,6 +30,7 @@ import java.util.List;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
+@RunWith(SpringRunner.class)
 @SpringBootTest(classes = MeetingAppApplication.class)
 @AutoConfigureMockMvc
 class ProfileControllerTest {
@@ -86,7 +89,7 @@ class ProfileControllerTest {
         Long userId = userRegisteredModelApi.getId();
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .get(ApiRoutes.Base.PATH + ApiRoutes.Profile.PATH + ApiRoutes.Profile.USER_ID,userId))
+                        .get(ApiRoutes.Base.PATH + ApiRoutes.User.PATH + ApiRoutes.User.ID,userId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.sex", Matchers.equalTo(profile.getSex())))
@@ -97,7 +100,6 @@ class ProfileControllerTest {
                 .andExpect(jsonPath("$.photo", Matchers.equalTo(profile.getPhoto())))
                 .andExpect(jsonPath("$.city", Matchers.equalTo(profile.getCity())));
     }
-
 
 //    @Test
 //    void deleteProfileByUserId() {

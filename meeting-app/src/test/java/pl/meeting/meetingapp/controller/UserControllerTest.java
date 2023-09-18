@@ -3,24 +3,32 @@ package pl.meeting.meetingapp.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import pl.meeting.meetingapp.ApiRoutes;
 import pl.meeting.meetingapp.MeetingAppApplication;
+import pl.meeting.meetingapp.entity.Profile;
+import pl.meeting.meetingapp.entity.User;
 import pl.meeting.meetingapp.models.UserLoginModelApi;
 import pl.meeting.meetingapp.models.UserPostModelApi;
+import pl.meeting.meetingapp.models.UserRegisteredModelApi;
+import pl.meeting.meetingapp.repository.ProfileRepository;
 import pl.meeting.meetingapp.repository.UserRepository;
 import pl.meeting.meetingapp.service.UserService;
 
 import javax.transaction.Transactional;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 
 @SpringBootTest(classes = MeetingAppApplication.class)
 @AutoConfigureMockMvc
@@ -34,45 +42,67 @@ public class UserControllerTest {
     UserService userService;
     @Autowired
     ObjectMapper objectMapper;
-    UserPostModelApi userPostModelApi;
+    @Autowired
+    ProfileRepository profileRepository;
+    ObjectMapper mapper = new ObjectMapper();
+    Profile profile;
+    UserPostModelApi userPostModelApiToAdd;
+    UserPostModelApi userPostModelApiToGetProfile;
+    UserRegisteredModelApi userRegisteredModelApi;
     UserLoginModelApi userLoginModelApi;
-    @BeforeAll
-    static void beforeAll(){
-
-    }
-
-    @AfterAll
-    static void afterAll(){
-    }
 
     @BeforeEach
     void initializeData(){
-        userPostModelApi = new UserPostModelApi()
+        userPostModelApiToAdd = new UserPostModelApi()
+                .username("user2@gmail.com")
+                .password("hardpassword")
+                .firstName("name")
+                .lastName("surname")
+                .phoneNumber("123456789");
+
+        userPostModelApiToGetProfile = new UserPostModelApi()
                 .username("user1@usermail.com")
                 .password("hardpassword")
                 .firstName("name")
                 .lastName("surname")
                 .phoneNumber("123456789");
 
+        userRegisteredModelApi = userService.addUser(userPostModelApiToGetProfile);
 
+        User user = userRepository.findById(userRegisteredModelApi.getId()).get();
+
+        profile = Profile.builder()
+                .user(user)
+                .sex("Male")
+                .interests(List.of())
+                .job("Software Engineer")
+                .school("University of Example")
+                .description("I am a software engineer interested in technology.")
+                .photo("profile-photo.jpg")
+                .city("Example City")
+                .build();
+
+        profileRepository.save(profile);
     }
 
     @AfterEach
     void cleanData(){
         userRepository.deleteAll();
+        profileRepository.deleteAll();
     }
 
 
     @Test
     @Transactional
+    @WithMockUser
     void addUser_DataToAddUserGiven_ShouldAddNewUser() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
                         .post(ApiRoutes.Base.PATH+ApiRoutes.User.USERS)
-                        .content(objectMapper.writeValueAsString(userPostModelApi))
+                        .content(objectMapper.writeValueAsString(userPostModelApiToAdd))
                 .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.username", Matchers.equalTo(userPostModelApi.getUsername())))
+                .andExpect(jsonPath("$.username", Matchers.equalTo(userPostModelApiToAdd.getUsername())))
                 .andExpect(jsonPath("$.password", Matchers.notNullValue()));
     }
 
@@ -80,11 +110,9 @@ public class UserControllerTest {
     @Transactional
     void logInByCredentials_DataToAddUserGiven_ShouldAddNewUser() throws Exception{
 
-        userService.addUser(userPostModelApi);
-
         userLoginModelApi = new UserLoginModelApi()
-                .username(userPostModelApi.getUsername())
-                .password(userPostModelApi.getPassword());
+                .username(userPostModelApiToGetProfile.getUsername())
+                .password(userPostModelApiToGetProfile.getPassword());
 
         mockMvc.perform(MockMvcRequestBuilders
                         .post(ApiRoutes.Base.PATH+ApiRoutes.User.AUTH+ApiRoutes.User.LOGIN)
@@ -92,8 +120,32 @@ public class UserControllerTest {
                         .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.username", Matchers.equalTo(userPostModelApi.getUsername())))
+                .andExpect(jsonPath("$.username", Matchers.equalTo(userPostModelApiToGetProfile.getUsername())))
                 .andExpect(jsonPath("$.jwtToken", Matchers.notNullValue()));
     }
+
+    @Test
+    @Transactional
+    @WithMockUser()
+    void getUserProfile_UserIdGiven_ShouldReturnUserProfile() throws Exception{
+
+        Long userId = userRegisteredModelApi.getId();
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(ApiRoutes.Base.PATH + ApiRoutes.User.PATH + ApiRoutes.User.ID + ApiRoutes.User.PROFILE,userId))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.sex", Matchers.equalTo(profile.getSex())))
+                .andExpect(jsonPath("$.interests", Matchers.equalTo(profile.getInterests())))
+                .andExpect(jsonPath("$.job", Matchers.equalTo(profile.getJob())))
+                .andExpect(jsonPath("$.school", Matchers.equalTo(profile.getSchool())))
+                .andExpect(jsonPath("$.description", Matchers.equalTo(profile.getDescription())))
+                .andExpect(jsonPath("$.photo", Matchers.equalTo(profile.getPhoto())))
+                .andExpect(jsonPath("$.city", Matchers.equalTo(profile.getCity())));
+    }
+
+//    @Test
+//    void deleteProfileByUserId() {
+//    }
 
 }

@@ -50,12 +50,6 @@ public class UserController implements UserApi{
     }
 
     @Override
-    public ResponseEntity<Void> deleteProfileByUserId(Long id) {
-        userService.deleteUserProfile(id);
-        return ResponseEntity.ok().build();
-    }
-
-    @Override
     public ResponseEntity<ProfileGetModelApi> getUserProfile(Long id) {
         return ResponseEntity.ok()
                 .body(userService.getUserProfile(id));
