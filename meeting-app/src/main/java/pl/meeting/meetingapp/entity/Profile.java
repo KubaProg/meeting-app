@@ -2,7 +2,6 @@ package pl.meeting.meetingapp.entity;
 
 
 import lombok.*;
-import pl.meeting.meetingapp.models.CategoryModelApi;
 
 import javax.persistence.*;
 import java.util.List;

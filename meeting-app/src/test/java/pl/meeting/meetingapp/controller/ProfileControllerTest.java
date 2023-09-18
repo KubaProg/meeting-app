@@ -1,28 +1,21 @@
 package pl.meeting.meetingapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.Api;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import pl.meeting.meetingapp.ApiRoutes;
 import pl.meeting.meetingapp.MeetingAppApplication;
 import pl.meeting.meetingapp.entity.Profile;
 import pl.meeting.meetingapp.entity.User;
-import pl.meeting.meetingapp.models.UserLoginModelApi;
-import pl.meeting.meetingapp.models.UserModelApi;
 import pl.meeting.meetingapp.models.UserPostModelApi;
 import pl.meeting.meetingapp.models.UserRegisteredModelApi;
 import pl.meeting.meetingapp.repository.ProfileRepository;
@@ -30,14 +23,11 @@ import pl.meeting.meetingapp.repository.UserRepository;
 import pl.meeting.meetingapp.service.UserService;
 
 import javax.transaction.Transactional;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest(classes = MeetingAppApplication.class)
 @AutoConfigureMockMvc
 class ProfileControllerTest {

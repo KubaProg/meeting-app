@@ -3,33 +3,25 @@ package pl.meeting.meetingapp.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import pl.meeting.meetingapp.ApiRoutes;
 import pl.meeting.meetingapp.MeetingAppApplication;
 import pl.meeting.meetingapp.models.UserLoginModelApi;
 import pl.meeting.meetingapp.models.UserPostModelApi;
-import pl.meeting.meetingapp.models.UserRegisteredModelApi;
 import pl.meeting.meetingapp.repository.UserRepository;
 import pl.meeting.meetingapp.service.UserService;
 
 import javax.transaction.Transactional;
-
 import java.nio.charset.StandardCharsets;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest(classes = MeetingAppApplication.class)
 @AutoConfigureMockMvc
 public class UserControllerTest {

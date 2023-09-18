@@ -2,7 +2,6 @@ package pl.meeting.meetingapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.meeting.meetingapp.entity.Profile;
-import pl.meeting.meetingapp.entity.Role;
 
 import java.util.Optional;
 

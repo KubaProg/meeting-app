@@ -3,13 +3,11 @@ package pl.meeting.meetingapp.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import pl.meeting.meetingapp.mapper.UserMapper;
+import pl.meeting.meetingapp.api.UserApi;
 import pl.meeting.meetingapp.models.*;
 import pl.meeting.meetingapp.service.UserService;
-import pl.meeting.meetingapp.api.UserApi;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
