@@ -108,11 +108,11 @@ paths:
           description: ""
 
 
-  /api/v1/profiles/{userId}:
+  /api/v1/users/{userId}/profile:
     get:
       summary: get user profile information by user id
       tags:
-        - "Profile"
+        - "User"
       operationId: getUserProfile
       parameters:
         - name: userId
@@ -131,21 +131,34 @@ paths:
         404:
           description: "profile not found"
 
-    delete:
-      summary: delete profile by user id
+    put:
+      summary: Update user profile information
       tags:
-        - "Profile"
-      operationId: deleteProfileByUserId
+        - "User"
+      operationId: updateUserProfile
       parameters:
-        - name: id
+        - name: userId
           in: path
           required: true
           schema:
             type: integer
             format: int64
+      requestBody:
+        description: Updated profile data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfilePut'
       responses:
-        "200":
-          description: ""
+        200:
+          description: Profile updated successfully
+        400:
+          description: Bad request, invalid input data
+        404:
+          description: Profile not found
+
+
 
 
   /api/v1/events:
@@ -455,6 +468,27 @@ components:
       properties:
         id:
           type: integer
+        sex:
+          type: string
+        interests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        job:
+          type: string
+        school:
+          type: string
+        description:
+          type: string
+        photo:
+          type: string
+          description: url address of photo
+        city:
+          type: string
+
+    ProfilePut:
+      type: object
+      properties:
         sex:
           type: string
         interests:

@@ -34,6 +34,11 @@ public class UserController implements UserApi{
     }
 
     @Override
+    public ResponseEntity<Void> updateUserProfile(Long userId, ProfilePutModelApi body) {
+        return null;
+    }
+
+    @Override
     public ResponseEntity<List<UserGetModelApi>> getAllUsers() {
         return ResponseEntity.ok().body(userService.getAllUsers());
     }
@@ -43,6 +48,20 @@ public class UserController implements UserApi{
         userService.deleteUserById(id);
         return ResponseEntity.ok().build();
     }
+
+    @Override
+    public ResponseEntity<Void> deleteProfileByUserId(Long id) {
+        userService.deleteUserProfile(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<ProfileGetModelApi> getUserProfile(Long id) {
+        return ResponseEntity.ok()
+                .body(userService.getUserProfile(id));
+    }
+
+
 
 }
 

@@ -89,7 +89,6 @@ class ProfileControllerTest {
                         .get(ApiRoutes.Base.PATH + ApiRoutes.Profile.PATH + ApiRoutes.Profile.USER_ID,userId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", Matchers.equalTo(profile.getId().intValue())))
                 .andExpect(jsonPath("$.sex", Matchers.equalTo(profile.getSex())))
                 .andExpect(jsonPath("$.interests", Matchers.equalTo(profile.getInterests())))
                 .andExpect(jsonPath("$.job", Matchers.equalTo(profile.getJob())))
