@@ -9,6 +9,27 @@ tags:
 
 paths:
 
+  /api/v1/auth/login:
+    post:
+      summary: Log in user
+      tags:
+        - "User"
+      operationId: logInByCredentials
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserLogin"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRegistered'
+
+
   /api/v1/users:
     get:
       summary: Getting all users
@@ -23,9 +44,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
-
-  /api/v1/auth/add:
+                  $ref: '#/components/schemas/UserGet'
     post:
       summary: Add user
       tags:
@@ -43,7 +62,7 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/UserRegistered'
+                $ref: '#/components/schemas/UserRegistered'
 
   /api/v1/users/{id}:
     put:
@@ -89,7 +108,7 @@ paths:
           description: ""
 
 
-  /api/v1/profile/{userId}:
+  /api/v1/profiles/{userId}:
     get:
       summary: get user profile information by user id
       tags:
@@ -127,29 +146,6 @@ paths:
       responses:
         "200":
           description: ""
-
-
-
-
-  /api/v1/auth/login:
-    post:
-      summary: Log in user
-      tags:
-        - "User"
-      operationId: logInByCredentials
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserLogin"
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserRegistered'
 
 
   /api/v1/events:
@@ -201,7 +197,43 @@ components:
           description: the user firstname
           type: string
           example: name
-        surname:
+        lastName:
+          description: the user firstname
+          type: string
+          example: surname
+        phoneNumber:
+          description: the user phone number
+          type: string
+          example: 123456789
+        birthDate:
+          description: the user birth date
+          type: string
+          example: 01-01-2002
+        nick:
+          description: the user nick
+          type: string
+          example: johnnnny
+
+    UserGet:
+      description: User get model
+      type: object
+      required:
+        - username
+        - firstName
+        - lastName
+        - phoneNumber
+        - birthDate
+        - nick
+      properties:
+        username:
+          description: the user username
+          type: string
+          example: user1@usermail.com
+        firstName:
+          description: the user firstname
+          type: string
+          example: name
+        lastName:
           description: the user firstname
           type: string
           example: surname
@@ -241,7 +273,7 @@ components:
           description: the user firstname
           type: string
           example: name
-        surname:
+        lastName:
           description: the user firstname
           type: string
           example: surname
@@ -286,7 +318,7 @@ components:
           description: the user firstname
           type: string
           example: name
-        surname:
+        lastName:
           description: the user firstname
           type: string
           example: surname
@@ -326,7 +358,7 @@ components:
           description: the user firstname
           type: string
           example: name
-        surname:
+        lastName:
           description: the user firstname
           type: string
           example: surname

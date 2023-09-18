@@ -54,10 +54,10 @@ public class UserService {
         return userRegisteredModelApi;
     }
 
-    public List<UserModelApi> getAllUsers()
+    public List<UserGetModelApi> getAllUsers()
     {
         return userRepository.findAll()
-                .stream().map(userMapper::mapToUserModelApi)
+                .stream().map(userMapper::mapToUserGetModelApi)
                 .collect(Collectors.toList());
     }
 
@@ -71,7 +71,7 @@ public class UserService {
 
         User userToSave = User.builder()
                 .firstName(userPostModelApi.getFirstName())
-                .surname(userPostModelApi.getSurname())
+                .lastName(userPostModelApi.getLastName())
                 .username(userPostModelApi.getUsername())
                 .password(passwordEncoder.encode(userPostModelApi.getPassword()))
                 .phoneNumber(userPostModelApi.getPhoneNumber())
@@ -101,7 +101,7 @@ public class UserService {
 
         user.setId(id);
         user.setFirstName(userPutModelApi.getFirstName());
-        user.setSurname(userPutModelApi.getSurname());
+        user.setLastName(userPutModelApi.getLastName());
         user.setUsername(userPutModelApi.getUsername());
         user.setPassword(passwordEncoder.encode(userPutModelApi.getPassword()));
         user.setPhoneNumber(userPutModelApi.getPhoneNumber());

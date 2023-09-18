@@ -20,6 +20,7 @@ public class UserController implements UserApi{
         return ResponseEntity.ok(userService.addUser(userPostModelApi));
     }
 
+
     @Override
     public ResponseEntity<UserRegisteredModelApi> logInByCredentials(UserLoginModelApi userLoginModelApi) {
         return ResponseEntity.ok()
@@ -33,7 +34,7 @@ public class UserController implements UserApi{
     }
 
     @Override
-    public ResponseEntity<List<UserModelApi>> getAllUsers() {
+    public ResponseEntity<List<UserGetModelApi>> getAllUsers() {
         return ResponseEntity.ok().body(userService.getAllUsers());
     }
 

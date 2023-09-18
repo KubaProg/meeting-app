@@ -51,7 +51,7 @@ public class UserControllerTest {
                 .username("user1@usermail.com")
                 .password("hardpassword")
                 .firstName("name")
-                .surname("surname")
+                .lastName("surname")
                 .phoneNumber("123456789");
 
 
@@ -67,7 +67,7 @@ public class UserControllerTest {
     @Transactional
     void addUser_DataToAddUserGiven_ShouldAddNewUser() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                        .post(ApiRoutes.Base.PATH+ApiRoutes.User.AUTH+ApiRoutes.User.ADD)
+                        .post(ApiRoutes.Base.PATH+ApiRoutes.User.USERS)
                         .content(objectMapper.writeValueAsString(userPostModelApi))
                 .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)))
                 .andExpect(status().isOk())

@@ -52,7 +52,7 @@ class ProfileControllerTest {
                 .username("user1@usermail.com")
                 .password("hardpassword")
                 .firstName("name")
-                .surname("surname")
+                .lastName("surname")
                 .phoneNumber("123456789");
          userRegisteredModelApi = userService.addUser(userPostModelApi);
 

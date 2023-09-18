@@ -34,7 +34,7 @@ public class User implements UserDetails
     private String firstName;
 
     @Column(name = "SURNAME")
-    private String surname;
+    private String lastName;
 
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
