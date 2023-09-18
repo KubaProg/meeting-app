@@ -89,7 +89,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/UserGet'
 
     delete:
       summary: Delete User by id
@@ -127,7 +127,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Profile'
+                $ref: '#/components/schemas/ProfileGet'
         404:
           description: "profile not found"
 
@@ -455,6 +455,30 @@ components:
       properties:
         id:
           type: integer
+        sex:
+          type: string
+        interests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        job:
+          type: string
+        school:
+          type: string
+        description:
+          type: string
+        photo:
+          type: string
+          description: url address of photo
+        city:
+          type: string
+
+
+
+    ProfileGet:
+      description: user get model
+      type: object
+      properties:
         sex:
           type: string
         interests:

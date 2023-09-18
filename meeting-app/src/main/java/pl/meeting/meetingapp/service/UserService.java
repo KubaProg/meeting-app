@@ -88,7 +88,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserModelApi putUserById(Long id, UserPutModelApi userPutModelApi)
+    public UserGetModelApi putUserById(Long id, UserPutModelApi userPutModelApi)
     {
 
         User user = userRepository.findById(id)
@@ -109,7 +109,7 @@ public class UserService {
 
         User savedUser = userRepository.save(user);
 
-        return userMapper.mapToUserModelApi(savedUser);
+        return userMapper.mapToUserGetModelApi(savedUser);
     }
 
     public String authenticateUser(String username, String password) {
@@ -144,10 +144,10 @@ public class UserService {
                 .orElseThrow(RuntimeException::new);
     }
 
-    public ProfileModelApi getUserProfile(Long userId){
+    public ProfileGetModelApi getUserProfile(Long userId){
         Profile profile = profileRepository.findProfileByUserId(userId).orElseThrow(NoSuchElementException::new);
 
-        return profileMapper.mapToProfileModelApi(profile);
+        return profileMapper.mapToProfileGetModelApi(profile);
     }
 
     @Transactional

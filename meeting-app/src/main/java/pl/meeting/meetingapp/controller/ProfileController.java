@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import pl.meeting.meetingapp.api.ProfileApi;
+import pl.meeting.meetingapp.models.ProfileGetModelApi;
 import pl.meeting.meetingapp.models.ProfileModelApi;
 import pl.meeting.meetingapp.service.UserService;
 
@@ -20,7 +21,7 @@ public class ProfileController implements ProfileApi {
     }
 
         @Override
-    public ResponseEntity<ProfileModelApi> getUserProfile(Long id) {
+    public ResponseEntity<ProfileGetModelApi> getUserProfile(Long id) {
         return ResponseEntity.ok()
                 .body(userService.getUserProfile(id));
     }

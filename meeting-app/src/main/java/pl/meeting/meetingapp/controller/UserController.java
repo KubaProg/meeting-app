@@ -28,7 +28,7 @@ public class UserController implements UserApi{
     }
 
     @Override
-    public ResponseEntity<UserModelApi> putUserById(Long id, UserPutModelApi userPutModelApi) {
+    public ResponseEntity<UserGetModelApi> putUserById(Long id, UserPutModelApi userPutModelApi) {
         return ResponseEntity.ok()
                 .body(userService.putUserById(id, userPutModelApi));
     }
