@@ -46,6 +46,11 @@ public class UserController implements UserApi{
     }
 
     @Override
+    public ResponseEntity<UserGetModelApi> getUserById(Long id) {
+        return ResponseEntity.ok().body(userService.getUserById(id));
+    }
+
+    @Override
     public ResponseEntity<Void> deleteUserById(Long id) {
         userService.deleteUserById(id);
         return ResponseEntity.ok().build();

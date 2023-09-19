@@ -91,6 +91,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserGet'
 
+
+    get:
+      summary: Get user by ID
+      tags:
+        - "User"
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGet'
+
     delete:
       summary: Delete User by id
       tags:
@@ -128,8 +149,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProfileGet'
-        404:
-          description: "profile not found"
 
     put:
       summary: Update user profile information
@@ -153,10 +172,6 @@ paths:
       responses:
         200:
           description: Profile updated successfully
-        400:
-          description: Bad request, invalid input data
-        404:
-          description: Profile not found
 
 
 

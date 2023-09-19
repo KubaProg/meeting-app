@@ -145,15 +145,17 @@ public class UserService {
                 .orElseThrow(RuntimeException::new);
     }
 
+    public UserGetModelApi getUserById(Long id) {
+        return userMapper.mapToUserGetModelApi(userRepository.findUserById(id)
+                .orElseThrow());
+    }
+
     public ProfileGetModelApi getUserProfile(Long userId){
         Profile profile = profileRepository.findProfileByUserId(userId).orElseThrow(NoSuchElementException::new);
 
         return profileMapper.mapToProfileGetModelApi(profile);
     }
 
-    @Transactional
-    public void deleteUserProfile(Long userId) {
-        profileRepository.deleteProfileByUserId(userId);
-    }
+
 
 }
