@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.meeting.meetingapp.Exception.User.UserNotFoundException;
 import pl.meeting.meetingapp.config.JwtService;
 import pl.meeting.meetingapp.entity.Profile;
 import pl.meeting.meetingapp.entity.Role;
@@ -44,7 +45,7 @@ public class UserService {
         String password = userLoginModelApi.getPassword();
 
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(username));
 
         String jwtToken = authenticateUser(username,password);
 

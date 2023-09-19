@@ -8,6 +8,8 @@ services:
       POSTGRES_USER: dockeruser
       POSTGRES_PASSWORD: dockerpassword
       POSTGRES_DB: dockerdb
+      SPRING_PROFILES_ACTIVE: dev
+
     ports:
       - "5432:5432"
     volumes:

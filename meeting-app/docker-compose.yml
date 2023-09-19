@@ -8,6 +8,7 @@ services:
       POSTGRES_USER: dockeruser
       POSTGRES_PASSWORD: dockerpassword
       POSTGRES_DB: dockerdb
+      SPRING_PROFILES_ACTIVE: prod
     ports:
       - "5432:5432"
     volumes:
@@ -26,6 +27,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dockerdb
       SPRING_DATASOURCE_USERNAME: dockeruser
       SPRING_DATASOURCE_PASSWORD: dockerpassword
+      SPRING_PROFILES_ACTIVE: prod
     networks:
       - mynetwork
 
@@ -34,3 +36,4 @@ volumes:
 
 networks:
   mynetwork:
+

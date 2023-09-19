@@ -144,8 +144,5 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.city", Matchers.equalTo(profile.getCity())));
     }
 
-//    @Test
-//    void deleteProfileByUserId() {
-//    }
 
 }
