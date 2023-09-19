@@ -147,7 +147,7 @@ public class UserService {
 
     public UserGetModelApi getUserById(Long id) {
         return userMapper.mapToUserGetModelApi(userRepository.findUserById(id)
-                .orElseThrow());
+                .orElseThrow(() -> new UserNotFoundException(id)));
     }
 
     public ProfileGetModelApi getUserProfile(Long userId){
