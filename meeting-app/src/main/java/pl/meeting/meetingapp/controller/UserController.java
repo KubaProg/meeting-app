@@ -36,9 +36,12 @@ public class UserController implements UserApi{
     }
 
     @Override
-    public ResponseEntity<Void> updateUserProfile(Long userId, ProfilePutModelApi body) {
-        return null;
+    public ResponseEntity<Void> updateUserProfile(Long userId, ProfilePatchModelApi body) {
+        userService.updateUserProfile(userId, body);
+
+        return ResponseEntity.ok().build();
     }
+
 
     @Override
     public ResponseEntity<List<UserGetModelApi>> getAllUsers() {

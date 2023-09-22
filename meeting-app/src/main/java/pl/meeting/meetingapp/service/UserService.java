@@ -156,6 +156,16 @@ public class UserService {
         return profileMapper.mapToProfileGetModelApi(profile);
     }
 
+    public void updateUserProfile(Long userId, ProfilePatchModelApi updatedProfile) {
+         Profile profileToUpdate = profileRepository.findById(userId)
+                 .orElseThrow(() -> new UserNotFoundException(userId));
+
+
+        profileMapper.updateProfileFromProfilePatchModelApi(updatedProfile, profileToUpdate);
+        profileRepository.save(profileToUpdate);
+
+    }
+
 
 
 }
