@@ -192,6 +192,45 @@ paths:
                 items:
                   $ref: '#/components/schemas/Event'
 
+    post:
+      summary: Creating a new event
+      tags:
+        - "Event"
+      operationId: createEvent
+      requestBody:
+        description: Event data to create a new event
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventPost'
+      responses:
+        "201":
+          description: Event created successfully
+
+
+  /api/v1/events/{id}:
+    get:
+      summary: Get event by ID
+      tags:
+        - "Event"
+      operationId: getEventById
+      parameters:
+        - name: id
+          in: path
+          description: ID of the event to retrieve
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Event details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventGet'
+
 
 components:
   schemas:
@@ -435,6 +474,48 @@ components:
         - date
         - startTime
         - endTime
+        - location
+
+    EventGet:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+        startTime:
+          type: string
+        endTime:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+      required:
+        - name
+        - date
+        - startTime
+        - location
+
+    EventPost:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+        startTime:
+          type: string
+        endTime:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+      required:
+        - name
+        - date
+        - startTime
         - location
 
     Location:
