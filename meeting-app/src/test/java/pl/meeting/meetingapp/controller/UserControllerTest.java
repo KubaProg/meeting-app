@@ -2,17 +2,18 @@ package pl.meeting.meetingapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.*;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import pl.meeting.meetingapp.ApiRoutes;
 import pl.meeting.meetingapp.MeetingAppApplication;
 import pl.meeting.meetingapp.entity.Profile;
@@ -96,15 +97,26 @@ public class UserControllerTest {
     @Transactional
     @WithMockUser
     void addUser_DataToAddUserGiven_ShouldAddNewUser() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders
-                        .post(ApiRoutes.Base.PATH+ApiRoutes.User.USERS)
+        ResultActions postResult = mockMvc.perform(MockMvcRequestBuilders
+                        .post(ApiRoutes.Base.PATH + ApiRoutes.User.USERS)
                         .content(objectMapper.writeValueAsString(userPostModelApiToAdd))
-                .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)))
+                        .contentType(new MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)))
+                .andExpect(status().isCreated())
+                .andExpect(header().string("Location", Matchers.containsString("/users/")));
+
+        String locationHeader = postResult.andReturn().getResponse().getHeader("Location");
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(ApiRoutes.Base.PATH + locationHeader))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.username", Matchers.equalTo(userPostModelApiToAdd.getUsername())))
-                .andExpect(jsonPath("$.password", Matchers.notNullValue()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username", Matchers.equalTo(userPostModelApiToAdd.getUsername())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", Matchers.equalTo(userPostModelApiToAdd.getFirstName())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", Matchers.equalTo(userPostModelApiToAdd.getLastName())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.phoneNumber", Matchers.equalTo(userPostModelApiToAdd.getPhoneNumber())));
+        
     }
+
 
     @Test
     @Transactional

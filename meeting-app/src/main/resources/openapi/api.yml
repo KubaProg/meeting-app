@@ -57,12 +57,8 @@ paths:
             schema:
               $ref: "#/components/schemas/UserPost"
       responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserRegistered'
+        "201":
+          description: "user added successfully"
 
   /api/v1/users/{id}:
     put:

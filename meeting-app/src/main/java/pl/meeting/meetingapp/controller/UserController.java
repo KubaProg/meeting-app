@@ -8,6 +8,7 @@ import pl.meeting.meetingapp.api.UserApi;
 import pl.meeting.meetingapp.models.*;
 import pl.meeting.meetingapp.service.UserService;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -18,8 +19,12 @@ public class UserController implements UserApi{
     private final UserService userService;
 
     @Override
-    public ResponseEntity<UserRegisteredModelApi> addUser(UserPostModelApi userPostModelApi) {
-        return ResponseEntity.ok(userService.addUser(userPostModelApi));
+    public ResponseEntity<Void> addUser(UserPostModelApi userPostModelApi) {
+        UserRegisteredModelApi newUser = userService.addUser(userPostModelApi);
+
+        String newResourceUrl = "/users/" + newUser.getId();
+
+        return ResponseEntity.created(URI.create(newResourceUrl)).build();
     }
 
 
