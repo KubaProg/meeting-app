@@ -48,13 +48,11 @@ public class UserController implements UserApi{
     }
 
     @Override
-    public ResponseEntity<Void> updateUserProfile(Long userId, ProfilePatchModelApi body) {
-        Profile profile = userService.updateUserProfile(userId, body);
+    public ResponseEntity<Void> updateUserProfile(Long userId, ProfilePutModelApi body) {
+        userService.updateUserProfile(userId, body);
 
         String uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(profile.getId())
                 .toUriString();
 
         HttpHeaders headers = new HttpHeaders();

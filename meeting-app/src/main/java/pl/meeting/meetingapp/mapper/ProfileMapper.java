@@ -4,8 +4,7 @@ import org.mapstruct.*;
 import pl.meeting.meetingapp.entity.Event;
 import pl.meeting.meetingapp.entity.Profile;
 import pl.meeting.meetingapp.models.ProfileGetModelApi;
-import pl.meeting.meetingapp.models.ProfileModelApi;
-import pl.meeting.meetingapp.models.ProfilePatchModelApi;
+import pl.meeting.meetingapp.models.ProfilePutModelApi;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,7 +38,7 @@ public interface ProfileMapper {
     ProfileGetModelApi mapToProfileGetModelApi(Profile profile);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateProfileFromProfilePatchModelApi(ProfilePatchModelApi dto, @MappingTarget Profile entity);
+    void updateProfileFromProfilePatchModelApi(ProfilePutModelApi dto, @MappingTarget Profile entity);
 
 
 }

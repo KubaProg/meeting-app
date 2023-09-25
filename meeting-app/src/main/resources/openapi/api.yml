@@ -146,7 +146,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProfileGet'
 
-    patch:
+    put:
       summary: Update user profile information
       tags:
         - "User"
@@ -164,7 +164,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProfilePatch'
+              $ref: '#/components/schemas/ProfilePut'
       responses:
         200:
           description: Profile updated successfully
@@ -578,7 +578,7 @@ components:
         city:
           type: string
 
-    ProfilePatch:
+    ProfilePut:
       type: object
       properties:
         sex:
