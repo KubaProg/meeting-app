@@ -107,7 +107,7 @@ public class UserControllerTest {
         String locationHeader = postResult.andReturn().getResponse().getHeader("Location");
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .get(ApiRoutes.Base.PATH + locationHeader))
+                        .get(locationHeader))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.username", Matchers.equalTo(userPostModelApiToAdd.getUsername())))

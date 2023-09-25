@@ -1,10 +1,14 @@
 package pl.meeting.meetingapp.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.meeting.meetingapp.api.UserApi;
+import pl.meeting.meetingapp.entity.Profile;
 import pl.meeting.meetingapp.models.*;
 import pl.meeting.meetingapp.service.UserService;
 
@@ -22,11 +26,14 @@ public class UserController implements UserApi{
     public ResponseEntity<Void> addUser(UserPostModelApi userPostModelApi) {
         UserRegisteredModelApi newUser = userService.addUser(userPostModelApi);
 
-        String newResourceUrl = "/users/" + newUser.getId();
+        String uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(newUser.getId())
+                .toUriString();
 
-        return ResponseEntity.created(URI.create(newResourceUrl)).build();
+        return ResponseEntity.created(URI.create(uri)).build();
     }
-
 
     @Override
     public ResponseEntity<UserRegisteredModelApi> logInByCredentials(UserLoginModelApi userLoginModelApi) {
@@ -42,9 +49,18 @@ public class UserController implements UserApi{
 
     @Override
     public ResponseEntity<Void> updateUserProfile(Long userId, ProfilePatchModelApi body) {
-        userService.updateUserProfile(userId, body);
+        Profile profile = userService.updateUserProfile(userId, body);
 
-        return ResponseEntity.ok().build();
+        String uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(profile.getId())
+                .toUriString();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create(uri));
+
+        return new ResponseEntity<>(headers, HttpStatus.OK);
     }
 
 
