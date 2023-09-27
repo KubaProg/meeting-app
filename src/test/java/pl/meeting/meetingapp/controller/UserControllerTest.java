@@ -45,7 +45,6 @@ public class UserControllerTest {
     ObjectMapper objectMapper;
     @Autowired
     ProfileRepository profileRepository;
-    ObjectMapper mapper = new ObjectMapper();
     Profile profile;
     UserPostModelApi userPostModelApiToAdd;
     UserPostModelApi userPostModelApiToGetProfile;

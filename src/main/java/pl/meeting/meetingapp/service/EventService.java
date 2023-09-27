@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.meeting.meetingapp.Exception.Event.EventNotFoundException;
 import pl.meeting.meetingapp.entity.Event;
+import pl.meeting.meetingapp.entity.Location;
+import pl.meeting.meetingapp.entity.LocationRepository;
 import pl.meeting.meetingapp.mapper.EventMapper;
 import pl.meeting.meetingapp.models.EventGetModelApi;
 import pl.meeting.meetingapp.models.EventModelApi;
@@ -20,6 +22,7 @@ public class EventService {
 
     private final EventMapper eventMapper;
     private final EventRepository eventRepository;
+    private final LocationRepository locationRepository;
 
     public List<EventModelApi> getEvents() {
         return eventRepository.
@@ -29,10 +32,15 @@ public class EventService {
                 .collect(Collectors.toList());
     }
 
-    public Event createEvent(EventPostModelApi eventPostModelApi) {
-        Event savedEvent = eventRepository.save(eventMapper.mapToEvent(eventPostModelApi));
+    public EventGetModelApi createEvent(EventPostModelApi eventPostModelApi) {
 
-        return savedEvent;
+        Location location = locationRepository.findById(eventPostModelApi.getLocationId())
+                .orElseThrow(RuntimeException::new);
+
+        Event event = eventMapper.mapToEvent(eventPostModelApi);
+        event.setLocation(location);
+
+        return eventMapper.mapToEventGetModelApi(eventRepository.save(event));
     }
 
     public EventGetModelApi getEvent(Long eventId) {
