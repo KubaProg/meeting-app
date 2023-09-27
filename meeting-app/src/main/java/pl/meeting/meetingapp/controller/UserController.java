@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.meeting.meetingapp.api.UserApi;
-import pl.meeting.meetingapp.entity.Profile;
 import pl.meeting.meetingapp.models.*;
 import pl.meeting.meetingapp.service.UserService;
 
