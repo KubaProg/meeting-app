@@ -18,19 +18,22 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.22/lombok-1.18.22.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
         </processorPath>
+        <module name="meeting-app" />
         <module name="workshop-management" />
         <module name="MeetingApp" />
-        <module name="meeting-app" />
+        <module name="Meeting-app" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="meeting-app" target="11" />
+      <module name="Meeting-app" target="11" />
       <module name="MeetingApp" target="11" />
       <module name="workshop-management" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Meeting-app" options="-parameters" />
       <module name="MeetingApp" options="-parameters" />
       <module name="meeting-app" options="-parameters" />
       <module name="workshop-management" options="-parameters" />
