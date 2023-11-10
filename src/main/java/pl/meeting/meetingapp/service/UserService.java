@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.meeting.meetingapp.Exception.User.UserAlreadyExistsException;
 import pl.meeting.meetingapp.Exception.User.UserNotFoundException;
 import pl.meeting.meetingapp.config.JwtService;
 import pl.meeting.meetingapp.entity.Profile;
@@ -78,6 +79,11 @@ public class UserService {
                 .phoneNumber(userPostModelApi.getPhoneNumber())
                 .roles(roles)
                 .build();
+
+        userRepository.findByUsername(userToSave.getUsername())
+                .ifPresent(existingUser -> {
+                    throw new UserAlreadyExistsException(existingUser.getUsername());
+                });
 
         User savedUser = userRepository.save(userToSave);
         String jwtToken = authenticateUser(userPostModelApi.getUsername(),userPostModelApi.getPassword());

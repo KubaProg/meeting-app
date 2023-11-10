@@ -31,6 +31,7 @@ public class SecurityConfiguration {
                 .antMatchers("/swagger-ui/**","/v3/api-docs/swagger-config","/v3/api-docs")
                 .permitAll()
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/api/v1/users").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
