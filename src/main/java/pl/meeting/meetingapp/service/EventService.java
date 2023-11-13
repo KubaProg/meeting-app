@@ -34,8 +34,16 @@ public class EventService {
 
     public EventGetModelApi createEvent(EventPostModelApi eventPostModelApi) {
 
-        Location location = locationRepository.findById(eventPostModelApi.getLocationId())
-                .orElseThrow(RuntimeException::new);
+//        Location location = locationRepository.findById(eventPostModelApi.getLocationId())
+//                .orElseThrow(RuntimeException::new);
+
+        Location location = new Location();
+        location.setId(1L);
+        location.setName("Test name");
+        location.setAddress("Cwiartki 3/4");
+        location.setLatitude(10.12);
+        location.setLongitude(16.22);
+        locationRepository.save(location);
 
         Event event = eventMapper.mapToEvent(eventPostModelApi);
         event.setLocation(location);
